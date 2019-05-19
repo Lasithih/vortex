@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lasith/Documents/Projects/Downloader/config/config.h
+
+/home/lasith/Documents/Projects/Downloader/consts.h
+
+/home/lasith/Documents/Projects/Downloader/db/db_access.c
+db_access.h
+/home/lasith/Documents/Projects/Downloader/db/db_access.h
+../log/logger.h
+/home/lasith/Documents/Projects/Downloader/log/logger.h
+../structs/job_t.h
+/home/lasith/Documents/Projects/Downloader/structs/job_t.h
+../helpers/conversions.h
+/home/lasith/Documents/Projects/Downloader/helpers/conversions.h
+../config/config.h
+/home/lasith/Documents/Projects/Downloader/config/config.h
+mysql/mysql.h
+-
+string.h
+-
+stdio.h
+-
+
+/home/lasith/Documents/Projects/Downloader/db/db_access.h
+
+/home/lasith/Documents/Projects/Downloader/helpers/conversions.h
+
+/home/lasith/Documents/Projects/Downloader/log/logger.h
+
+/home/lasith/Documents/Projects/Downloader/structs/job_t.h
+../consts.h
+/home/lasith/Documents/Projects/Downloader/consts.h
+
