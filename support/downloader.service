@@ -1,0 +1,14 @@
+[Unit]
+Description=Lasith's Scheduled Downloader for Linux
+StartLimitInterval=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+User=root
+WorkingDirectory=/home/lasith/LIHApps/Downloader
+ExecStart=/home/lasith/LIHApps/Downloader/Downloader
+
+[Install]
+WantedBy=multi-user.target

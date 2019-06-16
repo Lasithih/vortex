@@ -24,8 +24,19 @@ char *db_name;
 
 char *download_dir;
 
+bool log_enabled = true;
+
 void init_config()
 {
+    char *log = (char *) get_value_for_key("log.enabled");
+    if (strcmp(log,"1")==0) {
+        log_enabled = true;
+    } else {
+        log_enabled = false;
+    }
+    config_destroy(&cfg);
+
+
     char *cserver = (char *) get_value_for_key("database.server");
     server = malloc(strlen(cserver)+1);
     if (server == NULL) {
@@ -117,6 +128,11 @@ char *get_database_password()
 char *get_database_dbname()
 {
     return db_name;
+}
+
+bool is_log_enabled()
+{
+    return log_enabled;
 }
 
 

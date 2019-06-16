@@ -59,9 +59,11 @@ void print_console(const char *__restrict __format, ...)
 
     fprintf (stdout, "%s", message);
 
-    log4c_category_t *icat = NULL;
-    icat = log4c_category_get(LOG_CATEGORY_DEBUG);
-    log4c_category_log(icat, LOG4C_PRIORITY_DEBUG, message);
+    if(is_log_enabled()) {
+        log4c_category_t *icat = NULL;
+        icat = log4c_category_get(LOG_CATEGORY_DEBUG);
+        log4c_category_log(icat, LOG4C_PRIORITY_DEBUG, message);
+    }
 
     free(message);
     pthread_mutex_unlock(&mutex_logger);
