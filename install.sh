@@ -43,9 +43,9 @@ make
 echo "Installing..."
 mkdir -p $HOME/LIHApps/Downloader
 cp Downloader $HOME/LIHApps/Downloader
+cd ..
 cp support/config.cfg $HOME/LIHApps/Downloader
 cp support/log4crc $HOME/LIHApps/Downloader
-cd ..
 
 echo "Enabling service"
 sed -i "s~WorkingDirectory=~WorkingDirectory=$HOME/LIHApps/Downloader~" support/downloader.service

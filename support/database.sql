@@ -1,3 +1,6 @@
+CREATE DATABASE  IF NOT EXISTS `downloads` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `downloads`;
+
 --
 -- Table structure for table `jobs`
 --
