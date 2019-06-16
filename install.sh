@@ -22,14 +22,17 @@ echo "Installing libConfig"
 sudo apt-get install -y libconfig-dev
 
 
-echo "Enter mysql server address (eg: localhost)"
+echo "Enter mysql server address (eg: localhost):  "
 read db_server
 
-echo "Enter mysql user (eg: root)"
+read -p "Enter mysql server address (Leave blank to use default port):  " port
+port=${port:-3306}
+
+echo "Enter mysql user (eg: root):  "
 read db_user
 
 echo "Enter mysql password"
-mysql -u $db_user -p << EOF
+mysql -u $db_user -h $db_server -P port -p << EOF
 source support/database.sql
 EOF
 
@@ -48,8 +51,8 @@ cp support/config.cfg $HOME/LIHApps/Downloader
 cp support/log4crc $HOME/LIHApps/Downloader
 
 echo "Enabling service"
-sed -i "s~WorkingDirectory=~WorkingDirectory=$HOME/LIHApps/Downloader~" support/downloader.service
-sed -i "s~ExecStart=~ExecStart=$HOME/LIHApps/Downloader/Downloader~" support/downloader.service
+sed -i "/WorkingDirectory=/c\WorkingDirectory=$HOME/LIHApps/Downloader" support/downloader.service
+sed -i "/ExecStart=/c\ExecStart=$HOME/LIHApps/Downloader/Downloader" support/downloader.service
 sudo cp support/downloader.service /lib/systemd/system
 
 sudo systemctl enable downloader.service
