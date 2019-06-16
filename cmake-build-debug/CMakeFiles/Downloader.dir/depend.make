@@ -33,6 +33,9 @@ CMakeFiles/Downloader.dir/command/youtube_dl.c.o: ../log/logger.h
 CMakeFiles/Downloader.dir/config/config.c.o: ../config/config.c
 CMakeFiles/Downloader.dir/config/config.c.o: ../config/config.h
 CMakeFiles/Downloader.dir/config/config.c.o: ../consts.h
+CMakeFiles/Downloader.dir/config/config.c.o: ../helpers/conversions.h
+CMakeFiles/Downloader.dir/config/config.c.o: ../helpers/string_utils.h
+CMakeFiles/Downloader.dir/config/config.c.o: ../log/logger.h
 
 CMakeFiles/Downloader.dir/db/db_access.c.o: ../config/config.h
 CMakeFiles/Downloader.dir/db/db_access.c.o: ../consts.h
@@ -60,6 +63,7 @@ CMakeFiles/Downloader.dir/helpers/time_handler.c.o: ../helpers/time_handler.h
 
 CMakeFiles/Downloader.dir/log/logger.c.o: ../config/config.h
 CMakeFiles/Downloader.dir/log/logger.c.o: ../consts.h
+CMakeFiles/Downloader.dir/log/logger.c.o: ../helpers/string_utils.h
 CMakeFiles/Downloader.dir/log/logger.c.o: ../log/logger.c
 CMakeFiles/Downloader.dir/log/logger.c.o: ../log/logger.h
 

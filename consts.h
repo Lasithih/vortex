@@ -10,6 +10,7 @@
 
 #define ENVIRONMENT_DEV                 "dev"
 #define ENVIRONMENT_QNAP                "qnap"
+#define ENVIRONMENT_GENERAL             "general"
 
 #define JOB_STATUS_PENDING              0
 #define JOB_STATUS_DOWNLOADING          1
@@ -22,11 +23,10 @@
 #define JOB_TYPE_WGET                   1
 
 
-#define COMMAND_OUT_PATH_QNAP           "/home/ubuntu/shared/joblogs/"
-#define COMMAND_OUT_PATH_DEV            "/home/lasith/Desktop/joblogs/"
+#define LOG_DIR                         "/var/log/downloader/"
+#define LOG_DIR_DEBUG                   "/var/log/downloader/debug"
+#define LOG_DIR_JOB                     "/var/log/downloader/jobs/"
+#define LOG_DIR_JOB_SUCCESS             "/var/log/downloader/jobs/success"
 
-
-#define JOB_SUCCESS_PATH_QNAP           "/home/ubuntu/shared/joblogs/success/"
-#define JOB_SUCCESS_PATH_DEV            "/home/lasith/Desktop/joblogs/success/"
 
 #endif //DOWNLOADER_CONSTS_H

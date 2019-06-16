@@ -34,6 +34,9 @@ CMakeFiles/Downloader.dir/config/config.c.o
  /home/lasith/Documents/Projects/Downloader/config/config.c
  /home/lasith/Documents/Projects/Downloader/config/config.h
  /home/lasith/Documents/Projects/Downloader/consts.h
+ /home/lasith/Documents/Projects/Downloader/helpers/conversions.h
+ /home/lasith/Documents/Projects/Downloader/helpers/string_utils.h
+ /home/lasith/Documents/Projects/Downloader/log/logger.h
 CMakeFiles/Downloader.dir/db/db_access.c.o
  /home/lasith/Documents/Projects/Downloader/config/config.h
  /home/lasith/Documents/Projects/Downloader/consts.h
@@ -61,6 +64,7 @@ CMakeFiles/Downloader.dir/helpers/time_handler.c.o
 CMakeFiles/Downloader.dir/log/logger.c.o
  /home/lasith/Documents/Projects/Downloader/config/config.h
  /home/lasith/Documents/Projects/Downloader/consts.h
+ /home/lasith/Documents/Projects/Downloader/helpers/string_utils.h
  /home/lasith/Documents/Projects/Downloader/log/logger.c
  /home/lasith/Documents/Projects/Downloader/log/logger.h
 CMakeFiles/Downloader.dir/main.c.o

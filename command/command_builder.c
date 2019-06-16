@@ -56,7 +56,7 @@ char *add_command_suffix(char *command, int job_id)
     char *suffix_1 = " ; then touch ";
     char *suffix_2 = "; else echo 'failed :('; fi";
     command = concatenate_string(command,suffix_1);
-    command = concatenate_string(command,get_job_success_path());
+    command = concatenate_string(command,get_log_dir_job_success());
     command = concatenate_string(command, id);
     command = concatenate_string(command,suffix_2);
 
@@ -116,7 +116,7 @@ char *add_output_file(char *command, int job_id)
 {
     char *id = int_to_string(job_id);
     command = concatenate_string(command, " >> ");
-    command = concatenate_string(command, get_command_output_path());
+    command = concatenate_string(command, get_log_dir_job());
     command = concatenate_string(command, id);
     command = concatenate_string(command, ".txt");
     command = concatenate_string(command, " 2>&1");

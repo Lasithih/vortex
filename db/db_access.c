@@ -11,21 +11,21 @@
 #include <string.h>
 #include <stdio.h>
 
-char *server = "192.168.1.6";
-char *user = "lasith";
-char *password = "lasith123";
-char *database = "downloads";
+char *server;
+char *user;
+char *password;
+char *database;
 
 void close_db_connection(MYSQL *conn);
 void print_db_error(MYSQL *con, char *title);
 
 MYSQL *init_db()
 {
-    if(strcmp(get_env(),ENVIRONMENT_DEV)==0)
-    {
-        database = "downloadstest";
-        server = "192.168.8.5";
-    }
+    server = get_database_server();
+    user = get_database_username();
+    password = get_database_password();
+    database = get_database_dbname();
+
     MYSQL *conn;
 
     conn = mysql_init(NULL);

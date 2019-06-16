@@ -21,6 +21,7 @@ int main()
 {
 
     init_logger();
+    init_config();
 
     print_console("....::::  VERSION %s  ::::....\n\n", VERSION);
 
@@ -52,7 +53,7 @@ int main()
             char *job_id = int_to_string(job.id);
             char *success_file = init_new_string();
 
-            success_file = concatenate_string(success_file, get_job_success_path());
+            success_file = concatenate_string(success_file, get_log_dir_job_success());
             success_file = concatenate_string(success_file, job_id);
             free(job_id);
 
@@ -90,6 +91,7 @@ int main()
         sleep(2);
     }
 
+    deinit_config();
     deinit_logger();
     return 0;
 }

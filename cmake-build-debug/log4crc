@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE log4c SYSTEM "">
+
+<log4c>
+
+	<config>
+		<bufsize>0</bufsize>
+		<debug level="2"/>
+		<nocleanup>0</nocleanup>
+		<reread>1</reread>
+	</config>
+
+	<category name="root" priority="notice"/>
+
+	<rollingpolicy name="debugrollingpolicy" type="sizewin" maxsize="1024000" maxnum="10" />
+
+	<appender name="debugrollingfileappender" type="rollingfile" logdir="/var/log/downloader/debug" prefix="logd" layout="dated" rollingpolicy="debugrollingpolicy" />
+	
+	<appender name="stdout" type="stream" layout="basic"/>
+	<appender name="stderr" type="stream" layout="dated"/>
+	<appender name="syslog" type="syslog" layout="basic"/>
+
+	<appender name="s13file" type="s13_file" layout="basic"/>
+	<appender name="plain_stderr" type="s13_stderr" layout="none"/>
+	<appender name="cat_stderr" type="s13_stderr" layout="catlayout"/>
+	<appender name="xml_stderr" type="s13_stderr" layout="xmllayout"/>
+        <appender name="user_stderr" type="s13_stderr" layout="userlayout"/>
+        <appender name="stdout" type="stdout" layout="dated"/>
+
+	<layout name="basic" type="basic"/>
+	<layout name="dated" type="dated"/>
+	
+	<layout name="catlayout" type="s13_cat"/>
+	<layout name="xmllayout" type="s13_xml"/>
+        <layout name="none" type="s13_none"/>
+	<layout name="userlayout" type="s13_userloc"/>
+	
+        <category name="com.downloader.debug" priority="debug" appender="debugrollingfileappender" />
+
+</log4c>
