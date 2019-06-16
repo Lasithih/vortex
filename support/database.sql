@@ -12,7 +12,7 @@ CREATE TABLE `jobs` (
   `job_id` int(11) NOT NULL AUTO_INCREMENT,
   `url` varchar(1000) NOT NULL,
   `start_at_midnight` int(1) NOT NULL DEFAULT '1',
-  `path` varchar(1000) NOT NULL DEFAULT '/home/ubuntu/shared/downloads',
+  `path` varchar(1000) NOT NULL DEFAULT '~/Downloads',
   `job_type` int(11) NOT NULL,
   `format` varchar(45) NOT NULL DEFAULT 'mp4',
   `status` int(1) NOT NULL DEFAULT '0',

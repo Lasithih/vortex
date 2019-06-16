@@ -37,6 +37,10 @@ source support/database.sql
 EOF
 
 
+sed -i "/server =/c\server = \"$db_server\"" support/config.cfg
+sed -i "/user =/c\user = \"$db_user\"" support/config.cfg
+
+
 echo "Building downloader"
 sudo mkdir build
 cd build
