@@ -26,7 +26,7 @@
 #define LOG_DIR                         "/var/log/downloader/"
 #define LOG_DIR_DEBUG                   "/var/log/downloader/debug"
 #define LOG_DIR_JOB                     "/var/log/downloader/jobs/"
-#define LOG_DIR_JOB_SUCCESS             "/var/log/downloader/jobs/success"
+#define LOG_DIR_JOB_SUCCESS             "/var/log/downloader/jobs/success/"
 
 
 #endif //DOWNLOADER_CONSTS_H
