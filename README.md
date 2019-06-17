@@ -3,12 +3,12 @@ Download manager for Linux written in c
 
 <br>
 
-###Prerequisites
+### Prerequisites
 You need to have MySQL server installed (local or remote)
 
 <br>
 
-###Install
+### Install
 Clone repository by running
 ```bash
 git clone https://github.com/Lasithih/downloader.git
@@ -26,7 +26,7 @@ sudo sh install.sh
 
 <br>
 
-###Configurations
+### Configurations
 You can find the configurations file at
 ```bash
 $HOME/LIHApps/Downloader/config.cfg
