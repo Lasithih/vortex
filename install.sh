@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
 
 sudo apt-get -y update
 
@@ -16,7 +20,7 @@ sudo apt-get install -y liblog4c-dev
 
 
 echo "Installing mysql client"
-sudo apt-get install -y libmysqlclient-dev
+sudo apt-get install -y mysql-client
 
 
 echo "Installing libConfig"
