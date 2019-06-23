@@ -121,6 +121,11 @@ void create_log_dirs()
     if (stat(job_success_dir, &st) == -1) {
         mkdir(job_success_dir, 0755);
     }
+
+    char *download_dir = "~/Downloads";
+    if (stat(download_dir, &st) == -1) {
+        mkdir(download_dir, 0755);
+    }
 }
 
 
