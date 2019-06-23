@@ -1,4 +1,6 @@
-# downloader
+
+# Download Manager
+
 Download manager for Linux written in c
 
 <br>
@@ -23,25 +25,31 @@ Go to base directory and execute
 ```bash
 ./install.sh
 ```
+
 This will
-- Install downloader as a systemd service 
-- Update the config file of the downloader with the configurations of your database 
-- Update the config file of the frontend app with the configurations of your database 
-
-
+- Install downloader as a systemd service
+- Update the config file of the downloader with the configurations of your database
+- Update the config file of the frontend app with the configurations of your database
 <br>
 
+### Frontend app
+To manage download jobs use the frontend app located in downloader-fe directory. **after running install.sh**
+Copy downloader-fe directory to a server
+<br>
+  
 ### Configurations
 You can find the configurations file at
 ```bash
 $HOME/LIHApps/Downloader/config.cfg
 ```
+<br>
 
 ### Troubleshooting
 Log files location
 ```bash
 /var/log/downloader
 ```
+<br>
 
 #### Check status of downloader
 ```bash
