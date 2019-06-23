@@ -10,6 +10,12 @@ echo "Installing build tools"
 sudo apt-get install -y cmake build-essential
 
 
+echo "Installing wget"
+sudo apt-get install -y wget
+
+sudo apt install -y python-minimal
+
+
 echo "Installing youtube-dl"
 sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
 sudo chmod a+rx /usr/local/bin/youtube-dl
