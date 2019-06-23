@@ -40,7 +40,7 @@ read db_user
 echo "Enter mysql password: "
 read -s password
 
-mysql -u $db_user -h $db_server -P $port -p $password<< EOF
+mysql -u $db_user -h $db_server -P $port -p$password<< EOF
 source support/database.sql
 EOF
 
