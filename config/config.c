@@ -92,7 +92,7 @@ char *get_log_dir_job()
 
 char *get_log_dir_job_success()
 {
-    return LOG_DIR_JOB_SUCCESS;
+    return ENVIRONMENT_GENERAL;
 }
 
 char *get_log_dir_debug()
