@@ -17,6 +17,8 @@ CREATE TABLE `jobs` (
   `format` varchar(45) NOT NULL DEFAULT 'mp4',
   `status` int(1) NOT NULL DEFAULT '0',
   `comment` varchar(2000) DEFAULT NULL,
+  `start_time` varchar(45) DEFAULT NULL,
+  `end_time` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`job_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
