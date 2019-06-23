@@ -41,7 +41,7 @@ EOF
 
 sed -i "/server =/c\server = \"$db_server\"" support/config.cfg
 sed -i "/user =/c\user = \"$db_user\"" support/config.cfg
-sed -i "/password =/c\user = \"$password\"" support/config.cfg
+sed -i "/password =/c\password = \"$password\"" support/config.cfg
 
 sed -i "/private \$servername =/c\private \$servername = \"$db_server\"" downloader-fe/db_access.php
 sed -i "/private \$username =/c\private \$username = \"$db_user\"" downloader-fe/db_access.php

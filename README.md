@@ -23,7 +23,7 @@ https://github.com/Lasithih/downloader/releases
 
 Go to base directory and execute
 ```bash
-./install.sh
+sudo ./install.sh
 ```
 
 This will
