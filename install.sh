@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit
@@ -20,6 +20,7 @@ sudo apt-get install -y liblog4c-dev
 
 
 echo "Installing mysql client"
+sudo apt-get install -y libmysqlclient-dev
 sudo apt-get install -y mysql-client
 
 
@@ -38,7 +39,8 @@ read db_user
 
 echo "Enter mysql password: "
 read -s password
-mysql -u $db_user -h $db_server -P port -p $password<< EOF
+
+mysql -u $db_user -h $db_server -P $port -p $password<< EOF
 source support/database.sql
 EOF
 
