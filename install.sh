@@ -32,14 +32,20 @@ port=${port:-3306}
 echo "Enter mysql user (eg: root):  "
 read db_user
 
-echo "Enter mysql password"
-mysql -u $db_user -h $db_server -P port -p << EOF
+echo "Enter mysql password: "
+read -s password
+mysql -u $db_user -h $db_server -P port -p $password<< EOF
 source support/database.sql
 EOF
 
 
 sed -i "/server =/c\server = \"$db_server\"" support/config.cfg
 sed -i "/user =/c\user = \"$db_user\"" support/config.cfg
+sed -i "/password =/c\user = \"$password\"" support/config.cfg
+
+sed -i "/private \$servername =/c\private \$servername = \"$db_server\"" downloader-fe/db_access.php
+sed -i "/private \$username =/c\private \$username = \"$db_user\"" downloader-fe/db_access.php
+sed -i "/private \$password =/c\private \$password = \"$password\"" downloader-fe/db_access.php
 
 
 echo "Building downloader"

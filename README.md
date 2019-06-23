@@ -21,8 +21,13 @@ https://github.com/Lasithih/downloader/releases
 
 Go to base directory and execute
 ```bash
-sudo sh install.sh
+./install.sh
 ```
+This will
+- Install downloader as a systemd service 
+- Update the config file of the downloader with the configurations of your database 
+- Update the config file of the frontend app with the configurations of your database 
+
 
 <br>
 
@@ -30,4 +35,15 @@ sudo sh install.sh
 You can find the configurations file at
 ```bash
 $HOME/LIHApps/Downloader/config.cfg
+```
+
+### Troubleshooting
+Log files location
+```bash
+/var/log/downloader
+```
+
+#### Check status of downloader
+```bash
+sudo systemctl status downloader.service
 ```
