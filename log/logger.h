@@ -6,6 +6,7 @@
 #define DOWNLOADER_LOGGER_H
 
 
+
 int logger_initialized;
 
 int init_logger();

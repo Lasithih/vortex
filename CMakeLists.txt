@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10.2)
+cmake_minimum_required(VERSION 3.5.1)
 project(Downloader C)
 
 set(CMAKE_C_STANDARD 99)
@@ -23,7 +23,13 @@ add_executable(Downloader
         command/command_builder.c
         command/command_builder.h
         command/wget.c
-        command/wget.h helpers/file_utils.c helpers/file_utils.h helpers/string_utils.c helpers/string_utils.h command/ffmpeg.c command/ffmpeg.h)
+        command/wget.h
+        helpers/file_utils.c
+        helpers/file_utils.h
+        helpers/string_utils.c
+        helpers/string_utils.h
+        command/ffmpeg.c
+        command/ffmpeg.h)
 
 
-target_link_libraries(Downloader pthread mysqlclient log4c)
+target_link_libraries(Downloader pthread mysqlclient log4c config)
