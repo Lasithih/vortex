@@ -37,7 +37,7 @@ sudo apt-get install -y libconfig-dev
 echo "Enter mysql server address (eg: localhost):  "
 read db_server
 
-read -p "Enter mysql server address (Leave blank to use default port):  " port
+read -p "Enter mysql server port (Leave blank to use default port):  " port
 port=${port:-3306}
 
 echo "Enter mysql user (eg: root):  "
@@ -55,9 +55,10 @@ sed -i "/server =/c\server = \"$db_server\"" support/config.cfg
 sed -i "/user =/c\user = \"$db_user\"" support/config.cfg
 sed -i "/password =/c\password = \"$password\"" support/config.cfg
 
-sed -i "/private \$servername =/c\private \$servername = \"$db_server\"" downloader-fe/db_access.php
-sed -i "/private \$username =/c\private \$username = \"$db_user\"" downloader-fe/db_access.php
-sed -i "/private \$password =/c\private \$password = \"$password\"" downloader-fe/db_access.php
+sed -i "/private \$servername =/c\private \$servername = \"$db_server\";" support/downloader-fe/db_access.php
+sed -i "/private \$username =/c\private \$username = \"$db_user\";" support/downloader-fe/db_access.php
+sed -i "/private \$password =/c\private \$password = \"$password\";" support/downloader-fe/db_access.php
+sed -i "/private \$home = /c\private \$home = \"$HOME\";" support/downloader-fe/db_access.php
 
 
 echo "Building downloader"
@@ -72,6 +73,7 @@ cp Downloader $HOME/LIHApps/Downloader
 cd ..
 cp support/config.cfg $HOME/LIHApps/Downloader
 cp support/log4crc $HOME/LIHApps/Downloader
+cp support/ffmpeg_sup.sh $HOME/LIHApps/Downloader
 
 echo "Enabling service"
 sed -i "/WorkingDirectory=/c\WorkingDirectory=$HOME/LIHApps/Downloader" support/downloader.service
@@ -82,10 +84,8 @@ sudo systemctl enable downloader.service
 sudo systemctl start downloader.service
 
 
-
-
 read -p "Do you want to install the frontend app? " -n 1 -r
-echo    # (optional) move to a new line
+echo   
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     echo "Installing Apache"

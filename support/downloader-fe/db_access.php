@@ -9,6 +9,7 @@ class db_access
     private $username = "root";
     private $password = "root";
     private $dbname = "downloads";
+    private $home = "/home/lasith";
 
     function add_job($url, $off_peak, $download_type, $download_format, $start_time, $end_time) {
         // Create connection
@@ -30,7 +31,7 @@ class db_access
         } else {
             $end = "'".$end_time."'";
         }
-        $sql = "INSERT INTO jobs (url,start_at_midnight,job_type, format,start_time, end_time) VALUES ('" . $url . "', " . $off_peak .", " . $download_type . ", '" . $download_format . "', " . $start. ", " . $end .")";
+        $sql = "INSERT INTO jobs (url,start_at_midnight,path,job_type, format,start_time, end_time) VALUES ('" . $url . "', " . $off_peak .", '" . $this->home . "/Downloads', " . $download_type . ", '" . $download_format . "', " . $start. ", " . $end .")";
 
         $success = $conn->query($sql);
 
