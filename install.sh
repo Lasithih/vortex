@@ -82,3 +82,25 @@ sudo systemctl enable downloader.service
 sudo systemctl start downloader.service
 
 
+
+
+read -p "Do you want to install the frontend app? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo "Installing Apache"
+    sudo apt install -y apache2
+
+    echo "Installing PHP"
+    sudo apt install -y php-pear php-fpm php-dev php-zip php-curl php-xmlrpc php-gd php-mysql php-mbstring php-xml libapache2-mod-php
+
+    sudo systemctl restart apache2.service
+
+    sudo cp -R support/downloader-fe /var/www/html
+
+    echo "-----------------------------------------------------------"
+    echo "http://localhost/downloader-fe"
+    echo "-----------------------------------------------------------"
+fi
+
+
