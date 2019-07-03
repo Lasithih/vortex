@@ -34,7 +34,8 @@ This will
 
 ### Frontend app
 To manage download jobs use the frontend app located in downloader-fe directory. **after running install.sh**
-Copy downloader-fe directory to a server
+Copy downloader-fe directory to a server.
+This will be done automatically if you select to install the frontend app when you run **install.sh** 
 <br>
   
 ### Configurations
