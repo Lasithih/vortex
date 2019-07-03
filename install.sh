@@ -46,6 +46,12 @@ echo "------------------------------------"
 sudo apt-get install -y libconfig-dev
 
 
+echo "------------------------------------"
+echo "Installing ffmpeg"
+echo "------------------------------------"
+sudo apt-get install -y ffmpeg
+
+
 echo "**********************************************************"
 echo "Enter mysql server address (eg: localhost):  "
 read db_server
@@ -116,7 +122,7 @@ then
     echo "------------------------------------"
     echo "Installing PHP"
     echo "------------------------------------"
-    sudo apt install -y php libapache2-mod-php
+    sudo apt install -y php libapache2-mod-php php-mysql
 
     sudo systemctl restart apache2.service
 
