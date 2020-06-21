@@ -96,10 +96,10 @@ struct job_t get_next_job(int is_off_peak)
 
         job.start_at_midnight = stringToInt(row[2]);
 
-        char *path = row[3];
-        char *newPath = malloc(strlen(path) * sizeof(newPath) + 1);
-        string_copy(path,newPath);
-        job.path = newPath;
+//        char *path = row[3];
+//        char *newPath = malloc(strlen(path) * sizeof(newPath) + 1);
+//        string_copy(path,newPath);
+//        job.path = newPath;
 
         job.job_type = stringToInt(row[4]);
 
@@ -239,8 +239,8 @@ void free_job(struct job_t job)
     if(job.url != NULL)
         free(job.url);
 
-    if(job.path != NULL)
-        free(job.path);
+//    if(job.path != NULL)
+//        free(job.path);
 
     if(job.format != NULL)
         free(job.format);

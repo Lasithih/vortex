@@ -50,6 +50,8 @@ int main()
             print_console("New job found\n");
             print_console("URL: %s\n",job.url);
 
+            job.path = get_download_dir();
+
             char *job_id = int_to_string(job.id);
             char *success_file = init_new_string();
 
