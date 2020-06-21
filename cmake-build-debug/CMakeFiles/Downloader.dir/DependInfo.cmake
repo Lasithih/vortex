@@ -4,18 +4,18 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/lasith/Documents/Projects/Downloader/command/command_builder.c" "/home/lasith/Documents/Projects/Downloader/cmake-build-debug/CMakeFiles/Downloader.dir/command/command_builder.c.o"
-  "/home/lasith/Documents/Projects/Downloader/command/ffmpeg.c" "/home/lasith/Documents/Projects/Downloader/cmake-build-debug/CMakeFiles/Downloader.dir/command/ffmpeg.c.o"
-  "/home/lasith/Documents/Projects/Downloader/command/wget.c" "/home/lasith/Documents/Projects/Downloader/cmake-build-debug/CMakeFiles/Downloader.dir/command/wget.c.o"
-  "/home/lasith/Documents/Projects/Downloader/command/youtube_dl.c" "/home/lasith/Documents/Projects/Downloader/cmake-build-debug/CMakeFiles/Downloader.dir/command/youtube_dl.c.o"
-  "/home/lasith/Documents/Projects/Downloader/config/config.c" "/home/lasith/Documents/Projects/Downloader/cmake-build-debug/CMakeFiles/Downloader.dir/config/config.c.o"
-  "/home/lasith/Documents/Projects/Downloader/db/db_access.c" "/home/lasith/Documents/Projects/Downloader/cmake-build-debug/CMakeFiles/Downloader.dir/db/db_access.c.o"
-  "/home/lasith/Documents/Projects/Downloader/helpers/conversions.c" "/home/lasith/Documents/Projects/Downloader/cmake-build-debug/CMakeFiles/Downloader.dir/helpers/conversions.c.o"
-  "/home/lasith/Documents/Projects/Downloader/helpers/file_utils.c" "/home/lasith/Documents/Projects/Downloader/cmake-build-debug/CMakeFiles/Downloader.dir/helpers/file_utils.c.o"
-  "/home/lasith/Documents/Projects/Downloader/helpers/string_utils.c" "/home/lasith/Documents/Projects/Downloader/cmake-build-debug/CMakeFiles/Downloader.dir/helpers/string_utils.c.o"
-  "/home/lasith/Documents/Projects/Downloader/helpers/time_handler.c" "/home/lasith/Documents/Projects/Downloader/cmake-build-debug/CMakeFiles/Downloader.dir/helpers/time_handler.c.o"
-  "/home/lasith/Documents/Projects/Downloader/log/logger.c" "/home/lasith/Documents/Projects/Downloader/cmake-build-debug/CMakeFiles/Downloader.dir/log/logger.c.o"
-  "/home/lasith/Documents/Projects/Downloader/main.c" "/home/lasith/Documents/Projects/Downloader/cmake-build-debug/CMakeFiles/Downloader.dir/main.c.o"
+  "/home/lasith/Documents/Projects/downloader/command/command_builder.c" "/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/Downloader.dir/command/command_builder.c.o"
+  "/home/lasith/Documents/Projects/downloader/command/ffmpeg.c" "/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/Downloader.dir/command/ffmpeg.c.o"
+  "/home/lasith/Documents/Projects/downloader/command/wget.c" "/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/Downloader.dir/command/wget.c.o"
+  "/home/lasith/Documents/Projects/downloader/command/youtube_dl.c" "/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/Downloader.dir/command/youtube_dl.c.o"
+  "/home/lasith/Documents/Projects/downloader/config/config.c" "/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/Downloader.dir/config/config.c.o"
+  "/home/lasith/Documents/Projects/downloader/db/db_access.c" "/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/Downloader.dir/db/db_access.c.o"
+  "/home/lasith/Documents/Projects/downloader/helpers/conversions.c" "/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/Downloader.dir/helpers/conversions.c.o"
+  "/home/lasith/Documents/Projects/downloader/helpers/file_utils.c" "/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/Downloader.dir/helpers/file_utils.c.o"
+  "/home/lasith/Documents/Projects/downloader/helpers/string_utils.c" "/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/Downloader.dir/helpers/string_utils.c.o"
+  "/home/lasith/Documents/Projects/downloader/helpers/time_handler.c" "/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/Downloader.dir/helpers/time_handler.c.o"
+  "/home/lasith/Documents/Projects/downloader/log/logger.c" "/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/Downloader.dir/log/logger.c.o"
+  "/home/lasith/Documents/Projects/downloader/main.c" "/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/Downloader.dir/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
