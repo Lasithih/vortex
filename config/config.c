@@ -74,10 +74,19 @@ void init_config()
     }
     config_destroy(&cfg);
 
-    char *homedir = getenv("HOME");
-    download_dir = init_new_string();
-    download_dir = concatenate_string(download_dir, homedir);
-    download_dir = concatenate_string(download_dir, "/Downloads/");
+//    char *homedir = getenv("HOME");
+//    download_dir = init_new_string();
+//    download_dir = concatenate_string(download_dir, homedir);
+//    download_dir = concatenate_string(download_dir, "/Downloads/");
+
+    char *cdownload_dir = (char *)get_value_for_key("path.download_path");
+    download_dir = malloc(strlen(cdownload_dir)+1);
+    if (db_name == NULL) {
+        print_console("Config - Out of memory");
+    } else {
+        string_copy(cdownload_dir, download_dir);
+    }
+    config_destroy(&cfg);
 }
 
 char *get_env()

@@ -6,7 +6,7 @@
 #define DOWNLOADER_CONSTS_H
 
 
-#define VERSION                         "1.1"
+#define VERSION                         "1.2"
 
 #define ENVIRONMENT_DEV                 "dev"
 #define ENVIRONMENT_QNAP                "qnap"

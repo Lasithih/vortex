@@ -8,155 +8,153 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/lasith/Documents/Projects/Downloader/cmake-build-debug"/>
+				<Option working_dir="/home/lasith/Documents/Projects/downloader/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/lasith/Documents/Projects/Downloader/cmake-build-debug"/>
+				<Option working_dir="/home/lasith/Documents/Projects/downloader/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Downloader">
-				<Option output="/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Downloader" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/lasith/Documents/Projects/Downloader/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 Downloader"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Downloader/fast">
-				<Option output="/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Downloader" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/lasith/Documents/Projects/Downloader/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 Downloader/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/lasith/Documents/Projects/Downloader/cmake-build-debug"/>
+				<Option working_dir="/home/lasith/Documents/Projects/downloader/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/lasith/Documents/Projects/Downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Downloader">
+				<Option output="/home/lasith/Documents/Projects/downloader/cmake-build-debug/Downloader" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/lasith/Documents/Projects/downloader/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 Downloader"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Downloader/fast">
+				<Option output="/home/lasith/Documents/Projects/downloader/cmake-build-debug/Downloader" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/lasith/Documents/Projects/downloader/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 Downloader/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/lasith/Documents/Projects/downloader/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/command/command_builder.c">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/command/command_builder.c">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/command/command_builder.h">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/command/command_builder.h">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/command/ffmpeg.c">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/command/ffmpeg.c">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/command/ffmpeg.h">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/command/ffmpeg.h">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/command/wget.c">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/command/wget.c">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/command/wget.h">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/command/wget.h">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/command/youtube_dl.c">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/command/youtube_dl.c">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/command/youtube_dl.h">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/command/youtube_dl.h">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/config/config.c">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/config/config.c">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/config/config.h">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/config/config.h">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/consts.h">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/consts.h">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/db/db_access.c">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/db/db_access.c">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/db/db_access.h">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/db/db_access.h">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/helpers/conversions.c">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/helpers/conversions.c">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/helpers/conversions.h">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/helpers/conversions.h">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/helpers/file_utils.c">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/helpers/file_utils.c">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/helpers/file_utils.h">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/helpers/file_utils.h">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/helpers/miscellaneous.h">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/helpers/miscellaneous.h">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/helpers/string_utils.c">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/helpers/string_utils.c">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/helpers/string_utils.h">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/helpers/string_utils.h">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/helpers/time_handler.c">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/helpers/time_handler.c">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/helpers/time_handler.h">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/helpers/time_handler.h">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/log/logger.c">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/log/logger.c">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/log/logger.h">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/log/logger.h">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/main.c">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/main.c">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/structs/job_t.h">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/structs/job_t.h">
 			<Option target="Downloader"/>
 		</Unit>
-		<Unit filename="/home/lasith/Documents/Projects/Downloader/CMakeLists.txt">
+		<Unit filename="/home/lasith/Documents/Projects/downloader/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
