@@ -11,6 +11,7 @@
 #define ENVIRONMENT_DEV                 "dev"
 #define ENVIRONMENT_QNAP                "qnap"
 #define ENVIRONMENT_GENERAL             "general"
+#define ENVIRONMENT_CONTAINER           "container"
 
 #define JOB_STATUS_PENDING              0
 #define JOB_STATUS_DOWNLOADING          1

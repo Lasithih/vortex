@@ -17,9 +17,9 @@ const char* get_value_for_key(char* key);
 config_t cfg;
 
 //database
-char *server;
+char *s_server;
 char *username;
-char *password;
+char *s_password;
 char *db_name;
 
 char *download_dir;
@@ -37,12 +37,12 @@ void init_config()
     config_destroy(&cfg);
 
 
-    char *cserver = (char *) get_value_for_key("database.server");
-    server = malloc(strlen(cserver)+1);
-    if (server == NULL) {
+    char *cs_server = (char *) get_value_for_key("database.server");
+    s_server = malloc(strlen(cs_server)+1);
+    if (s_server == NULL) {
         print_console("Config - Out of memory");
     } else {
-        string_copy(cserver, server);
+        string_copy(cs_server, s_server);
     }
     config_destroy(&cfg);
 
@@ -56,12 +56,12 @@ void init_config()
     }
     config_destroy(&cfg);
 
-    char *cpassword = (char *)get_value_for_key("database.password");
-    password = malloc(strlen(cpassword)+1);
-    if (password == NULL) {
+    char *cs_password = (char *)get_value_for_key("database.password");
+    s_password = malloc(strlen(cs_password)+1);
+    if (s_password == NULL) {
         print_console("Config - Out of memory");
     } else {
-        string_copy(cpassword, password);
+        string_copy(cs_password, s_password);
     }
     config_destroy(&cfg);
 
@@ -91,7 +91,7 @@ void init_config()
 
 char *get_env()
 {
-    return ENVIRONMENT_DEV;
+    return ENVIRONMENT_CONTAINER;
 }
 
 char *get_log_dir_job()
@@ -101,7 +101,7 @@ char *get_log_dir_job()
 
 char *get_log_dir_job_success()
 {
-    return ENVIRONMENT_GENERAL;
+    return LOG_DIR_JOB_SUCCESS;
 }
 
 char *get_log_dir_debug()
@@ -121,7 +121,7 @@ char *get_download_dir()
 
 char *get_database_server()
 {
-    return server;
+    return s_server;
 }
 
 char *get_database_username()
@@ -131,7 +131,7 @@ char *get_database_username()
 
 char *get_database_password()
 {
-    return password;
+    return s_password;
 }
 
 char *get_database_dbname()
@@ -147,13 +147,34 @@ bool is_log_enabled()
 
 const char* get_value_for_key(char* key)
 {
+    char *env = get_env();
+    if (strcmp(env,ENVIRONMENT_CONTAINER) == 0)
+    {
+        char newkey[128];
+        strcpy(newkey , key);
+        for(int i = 0; i <= strlen(newkey); i++)
+        {
+            if(newkey[i] == '.')  
+            {
+                newkey[i] = '_';
+            } 
+        }
+        if(strcmp(newkey,"path_download_path")==0)
+        {
+            return "/Downloads";
+        }
+        char *val = getenv(newkey);
+        if(val == NULL)
+        {
+            print_console("Error: no values found for environment key %s\n", newkey);
+        }
+        return val;
+    }
     config_setting_t *setting;
 
     const char *str;
 
     config_init(&cfg);
-
-
 
     if(!config_read_file(&cfg, "config.cfg"))
     {

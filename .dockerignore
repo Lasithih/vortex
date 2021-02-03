@@ -1,0 +1,9 @@
+.idea
+cmake-build-debug
+docs
+support/downloader-fe
+support/downloader
+install.sh
+Dockerfile
+Dockerfile.temp
+config.env

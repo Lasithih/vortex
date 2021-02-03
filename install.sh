@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# This is used to install the downloader on a non container computer
+
+
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit

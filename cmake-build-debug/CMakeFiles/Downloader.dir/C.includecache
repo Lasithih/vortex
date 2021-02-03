@@ -34,73 +34,31 @@ ffmpeg.h
 ../structs/job_t.h
 /home/lasith/Documents/Projects/downloader/structs/job_t.h
 
-/home/lasith/Documents/Projects/downloader/command/ffmpeg.c
-stddef.h
--
-stdlib.h
--
-string.h
--
-ffmpeg.h
-/home/lasith/Documents/Projects/downloader/command/ffmpeg.h
-../helpers/string_utils.h
-/home/lasith/Documents/Projects/downloader/helpers/string_utils.h
-../helpers/conversions.h
-/home/lasith/Documents/Projects/downloader/helpers/conversions.h
-
 /home/lasith/Documents/Projects/downloader/command/ffmpeg.h
 
-/home/lasith/Documents/Projects/downloader/command/wget.c
-wget.h
 /home/lasith/Documents/Projects/downloader/command/wget.h
-../helpers/conversions.h
-/home/lasith/Documents/Projects/downloader/helpers/conversions.h
-../log/logger.h
-/home/lasith/Documents/Projects/downloader/log/logger.h
-../helpers/string_utils.h
-/home/lasith/Documents/Projects/downloader/helpers/string_utils.h
-stdlib.h
--
-string.h
--
-
-/home/lasith/Documents/Projects/downloader/command/wget.h
-
-/home/lasith/Documents/Projects/downloader/command/youtube_dl.c
-youtube_dl.h
-/home/lasith/Documents/Projects/downloader/command/youtube_dl.h
-../helpers/conversions.h
-/home/lasith/Documents/Projects/downloader/helpers/conversions.h
-../log/logger.h
-/home/lasith/Documents/Projects/downloader/log/logger.h
-../helpers/string_utils.h
-/home/lasith/Documents/Projects/downloader/helpers/string_utils.h
-stdlib.h
--
-string.h
--
 
 /home/lasith/Documents/Projects/downloader/command/youtube_dl.h
 
 /home/lasith/Documents/Projects/downloader/config/config.c
 config.h
 /home/lasith/Documents/Projects/downloader/config/config.h
-libconfig.h
--
 string.h
 -
 stdlib.h
 -
-../consts.h
-/home/lasith/Documents/Projects/downloader/consts.h
 ../helpers/string_utils.h
 /home/lasith/Documents/Projects/downloader/helpers/string_utils.h
 ../log/logger.h
 /home/lasith/Documents/Projects/downloader/log/logger.h
 ../helpers/conversions.h
 /home/lasith/Documents/Projects/downloader/helpers/conversions.h
+libconfig.h
+-
 
 /home/lasith/Documents/Projects/downloader/config/config.h
+../consts.h
+/home/lasith/Documents/Projects/downloader/consts.h
 stdbool.h
 -
 
@@ -126,57 +84,11 @@ stdio.h
 
 /home/lasith/Documents/Projects/downloader/db/db_access.h
 
-/home/lasith/Documents/Projects/downloader/helpers/conversions.c
-conversions.h
 /home/lasith/Documents/Projects/downloader/helpers/conversions.h
-../log/logger.h
-/home/lasith/Documents/Projects/downloader/log/logger.h
-string.h
--
-stdio.h
--
-stdlib.h
--
-ctype.h
--
-pthread.h
--
-
-/home/lasith/Documents/Projects/downloader/helpers/conversions.h
-
-/home/lasith/Documents/Projects/downloader/helpers/file_utils.c
-file_utils.h
-/home/lasith/Documents/Projects/downloader/helpers/file_utils.h
-miscellaneous.h
-/home/lasith/Documents/Projects/downloader/helpers/miscellaneous.h
-unistd.h
--
-stdio.h
--
 
 /home/lasith/Documents/Projects/downloader/helpers/file_utils.h
 
-/home/lasith/Documents/Projects/downloader/helpers/miscellaneous.h
-
-/home/lasith/Documents/Projects/downloader/helpers/string_utils.c
-string_utils.h
 /home/lasith/Documents/Projects/downloader/helpers/string_utils.h
-stdlib.h
--
-string.h
--
-
-/home/lasith/Documents/Projects/downloader/helpers/string_utils.h
-
-/home/lasith/Documents/Projects/downloader/helpers/time_handler.c
-time.h
--
-time_handler.h
-/home/lasith/Documents/Projects/downloader/helpers/time_handler.h
-../consts.h
-/home/lasith/Documents/Projects/downloader/consts.h
-miscellaneous.h
-/home/lasith/Documents/Projects/downloader/helpers/miscellaneous.h
 
 /home/lasith/Documents/Projects/downloader/helpers/time_handler.h
 

@@ -7,7 +7,7 @@
 
 
 
-int logger_initialized;
+
 
 int init_logger();
 void print_console(const char *__restrict __format, ...);
