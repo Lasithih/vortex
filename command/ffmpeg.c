@@ -8,13 +8,24 @@
 #include "ffmpeg.h"
 #include "../helpers/string_utils.h"
 #include "../helpers/conversions.h"
+#include "../config/config.h"
+#include "../consts.h"
 
 
 char *ffmpeg_start_command(char *command)
 {
-    char *start = " ./ffmpeg_sup.sh";
-
-    command = concatenate_string(command,start);
+    char *env = get_env();
+    if(strcmp(env,ENVIRONMENT_CONTAINER)==0) 
+    {
+        char *start = " build/ffmpeg_sup.sh";
+        command = concatenate_string(command,start);
+    }
+    else 
+    {
+        char *start = " ./ffmpeg_sup.sh";
+        command = concatenate_string(command,start);
+    }
+    
 
     return command;
 }

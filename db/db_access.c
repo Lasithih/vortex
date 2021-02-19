@@ -245,11 +245,11 @@ void free_job(struct job_t job)
     if(job.format != NULL)
         free(job.format);
 
-    if(job.start_time != NULL)
-        free(job.start_time);
+    // if(job.start_time != NULL)
+    //     free(job.start_time);
 
-    if(job.end_time != NULL)
-        free(job.end_time);
+    // if(job.end_time != NULL)
+    //     free(job.end_time);
 }
 
 

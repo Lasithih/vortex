@@ -74,7 +74,7 @@ void print_console(const char *__restrict __format, ...)
 
 void print_dev(const char *__restrict __format, ...)
 {
-    if(strcmp(get_env(),ENVIRONMENT_DEV)==0 || strcmp(get_env(),ENVIRONMENT_CONTAINER)==0) {
+    if(strcmp(get_env(),ENVIRONMENT_DEV)==0) {
         pthread_mutex_lock(&mutex_logger);
         char *message = malloc(2024);
         if(message == NULL) {

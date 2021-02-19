@@ -15,6 +15,7 @@ RUN apt-get -y update \
 COPY ./ ./
 
 RUN mkdir build \
+    && mkdir /Downloads \
     && cp support/log4crc build \
     && cp support/ffmpeg_sup.sh build \
     && cd build \

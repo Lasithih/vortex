@@ -144,6 +144,6 @@ int time_to_seconds(char *time)
 
     minutes = minutes + (hours * 60);
     seconds = seconds + (minutes * 60);
-
+    
     return seconds;
 }
