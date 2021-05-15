@@ -1,3 +1,0 @@
-/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/lasith/Documents/Projects/downloader/cmake-build-debug/CMakeFiles/Downloader.dir
