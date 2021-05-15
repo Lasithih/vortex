@@ -32,3 +32,4 @@
 *.dSYM/
 
 config.env
+__pycache__/

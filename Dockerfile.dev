@@ -4,7 +4,7 @@ WORKDIR /app/downloader
 
 RUN apt-get -y update 
 
-RUN pip3 install flask flask-sqlalchemy
+RUN pip3 install flask flask-sqlalchemy pip install flask-login sqlalchemy-utils
 
 
 COPY ./ ./
