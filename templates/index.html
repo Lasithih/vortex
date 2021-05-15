@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script src="{{ url_for('static',filename='js/login.js') }}"></script>
+<title>Download Manager</title>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+<a href="/logout">Logout</a>
+</div>
+
+{% endblock %}

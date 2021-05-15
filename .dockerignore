@@ -5,5 +5,6 @@ support/downloader-fe
 support/downloader
 install.sh
 Dockerfile
+Dockerfile.prod
 Dockerfile.dev
 config.env
