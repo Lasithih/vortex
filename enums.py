@@ -7,6 +7,7 @@ class Env(Enum):
 class JobType(Enum):
     Youtube = 1
     Direct = 2
+    YtdlUpdate = 3
 
 
 class JobStatus(Enum):

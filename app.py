@@ -7,6 +7,7 @@ import logging
 import config
 from enums import Env
 import youtube
+import downloader
 
 def signal_handler(sig, frame):
     print('cleaning up!')
@@ -21,8 +22,7 @@ def run_auto_updater():
         time.sleep(config.config_get_ytdl_check_update_interval())
 
 def run_downloader():
-    while True:
-        time.sleep(1)
+    downloader.init_downloader()
 
 
 # signal.signal(signal.SIGINT, signal_handler)
