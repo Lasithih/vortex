@@ -4,10 +4,11 @@ from werkzeug.wrappers import ResponseStream
 from db_access import Job
 from re import A
 from flask import request, jsonify
-from flask_login import login_user
+from flask_login import login_user, login_required
 from models import User
 import db_access
 import youtube
+import config
 
 def create_endpoints(app):
     create_endpoint_login(app)
@@ -22,7 +23,7 @@ def create_endpoint_login(app):
         username = info.get('username', 'guest')
         password = info.get('password', '')
 
-        if username == 'admin' and password == 'public':
+        if username == 'admin' and password == config.config_get_dashboard_password():
             login_user(User())
             response = {
                 'success': True,
@@ -38,6 +39,7 @@ def create_endpoint_login(app):
 
 def create_endpoint_job_list(app):
     @app.route('/api/v1/jobs/list', methods=['GET'])
+    @login_required
     def api_list_jobs():
         try:
             jobs = db_access.get_all_jobs()
@@ -56,6 +58,7 @@ def create_endpoint_job_list(app):
 
 def create_endpoint_job_save(app):
     @app.route('/api/v1/jobs/save', methods=['POST'])
+    @login_required
     def api_new_job():
         try:
             info = request.args
@@ -94,10 +97,10 @@ def create_endpoint_job_save(app):
 
 def create_endpoint_get_yt_video_info(app):
     @app.route('/api/v1/yt/info', methods=['GET'])
+    @login_required
     def get_yt_info():
         try:
             info = request.args
-            print(info)
             url = info.get('url', '')
             if(url == ''):
                 raise Exception("Invalid URL")

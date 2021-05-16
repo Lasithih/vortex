@@ -1,4 +1,3 @@
-
 # Download Manager
 
 Download manager for Linux written in c

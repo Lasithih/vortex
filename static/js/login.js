@@ -11,6 +11,13 @@ function login() {
         return;
     }
 
+    var next = new URL(window.location.href).searchParams.get("next");
+    var nextParam = '/';
+    if(next !== null && typeof next !== 'undefined'){
+        nextParam = next
+    }
+
+
     $.ajax({
         url: "/api/v1/auth/login", //the page containing php script
         type: "POST", //request type,
@@ -18,7 +25,7 @@ function login() {
         data: { username: email, password: password },
         success: function(result) {
             if(result.success) {
-                window.location.href = '/';
+                window.location.href = nextParam;
                 
             } else {
                 alert("Username or password is incorrect");
