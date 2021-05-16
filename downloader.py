@@ -1,10 +1,13 @@
-from enums import JobStatus
+import os
 import logging
-import threading
 import db_access
 import time
 from threading import Lock
+
+from enums import JobStatus, JobType
 from db_access import Job
+import youtube
+
 
 downloader_queue = []
 
@@ -12,18 +15,22 @@ downloader_queue = []
 def fill_pending_jobs():
     global downloader_queue
     global thread_lock
-
-    print("Before: Queue has {} items".format(len(downloader_queue)))
+    
     jobs = db_access.get_download_jobs()
     thread_lock.acquire()
     downloader_queue.extend(jobs)
     thread_lock.release()
-    print("After: Queue has {} items".format(len(downloader_queue)))
 
 def execute_job(job):
-    print("executing job {id}: {type}".format(id=job.id, type=job.job_type))
-    time.sleep(10)
-    print("executed job {id}: {type}".format(id=job.id, type=job.job_type))
+    if job.job_type == JobType.Youtube.value:
+        download_youtube(job)
+    elif job.job_type == JobType.Direct.value:
+        download_direct(job)
+    elif job.job_type == JobType.YtdlUpdate.value:
+        update_ytdl()
+    else:
+        logging.error("Unknown job type: {}".format(job.job_type))
+
     db_access.update_job_status(job.id, JobStatus.success)
 
 def init_downloader():
@@ -33,7 +40,6 @@ def init_downloader():
     thread_lock = Lock()
     downloader_queue = []
 
-    # start db listener thread
     while True:
         fill_pending_jobs()
         while(len(downloader_queue) > 0):
@@ -45,9 +51,12 @@ def init_downloader():
         time.sleep(5)
 
 
-    # start job processor
+def update_ytdl():
+    os.system('sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl')
+    os.system('sudo sudo chmod a+rx /usr/local/bin/youtube-dl')
 
+def download_youtube(job):
+    youtube.download(job)
 
-
-
-
+def download_direct(job):
+    pass

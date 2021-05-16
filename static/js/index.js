@@ -60,11 +60,9 @@ function fetchYTdata() {
         data: {url: url},
         success: function(result) {
             if(result.success) {
-                console.log(result)
                 populateYTdetails(result.data);
                 IndexViewModel.section_youtubeDetails.show();
             } else {
-                console.log(result)
                 IndexViewModel.section_youtubeDetails.hide();
             }
             IndexViewModel.btn_fetchYoutube.prop("disabled",false);

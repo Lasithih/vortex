@@ -15,3 +15,5 @@ class JobStatus(Enum):
     downloading = 2
     success = 3
     failed = 4
+
+    

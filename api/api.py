@@ -67,7 +67,7 @@ def create_endpoint_job_save(app):
             start_at_midnight = info.get('isOffPeak', '')
             job_type = JobType.Youtube.value
             format = info.get('format', '')
-            format = info.get('preset', 'auto')
+            preset = info.get('preset', 'auto')
             start_time = info.get('start_time', None)
             end_time = info.get('end_time', None)
 
@@ -78,6 +78,7 @@ def create_endpoint_job_save(app):
                 start_at_midnight = start_at_midnight,
                 job_type = job_type,
                 format = format,
+                preset = preset,
                 start_time = start_time,
                 end_time = end_time
             )

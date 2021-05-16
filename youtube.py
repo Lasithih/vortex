@@ -1,15 +1,17 @@
-from enums import JobType
+from __future__ import unicode_literals
+import youtube_dl
+
 import youtube_dl
 import requests
 import subprocess
-import os
 import logging
 
-import config
 import db_access
+from db_access import Job
+from enums import JobType
 
 
-ydl = youtube_dl.YoutubeDL({'outtmpl': '%(id)s.%(ext)s'})
+ydl = youtube_dl.YoutubeDL()
 
 def get_version():
     return subprocess.check_output('youtube-dl --version',shell=True).decode("utf-8").rstrip()
@@ -30,11 +32,10 @@ def check_updates():
         logging.info("Installed version: {}".format(ytdl_version))
         logging.info("Available version: {}".format(ytdl_latest_version))
 
-        job = db_access.Job(url='dummy',job_type = JobType.YtdlUpdate, format='dummy', preset='dummy')
+        job = db_access.Job(url='dummy',job_type = JobType.YtdlUpdate.value, format='dummy', preset='dummy')
         db_access.insert_job(job)
 
-        # os.system('sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl')
-        # os.system('sudo sudo chmod a+rx /usr/local/bin/youtube-dl')
+        
 
 
 def extract_info(url):
@@ -47,3 +48,28 @@ def extract_info(url):
     except:
         raise Exception("Could not extract data from URL")
 
+
+def download(job):
+    ydl_opts = {
+        'format': 'best',
+        'outtmpl': 'downloads/%(format_id)s-%(title)s.%(ext)s'
+    }
+    print("Format: {}".format(job.format))
+    print("preset: {}".format(job.preset))
+    if job.preset == 'auto':
+        if job.format == 'mp3':
+            ydl_opts['format'] = 'bestaudio/best'
+            ydl_opts['postprocessors'] = [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }]
+        else:
+            ydl_opts['format'] = job.format
+    else:
+        ydl_opts['format'] = job.preset
+
+
+    
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([job.url])

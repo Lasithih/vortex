@@ -112,3 +112,50 @@
 20:30:53,497 werkzeug INFO  * Restarting with stat
 20:31:00,953 werkzeug INFO  * Restarting with stat
 20:31:28,756 werkzeug INFO  * Restarting with stat
+00:30:19,833 werkzeug WARNING  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+00:30:19,833 werkzeug INFO  * Running on http://192.168.8.6:5000/ (Press CTRL+C to quit)
+00:30:31,987 werkzeug INFO 192.168.8.7 - - [17/May/2021 00:30:31] "GET /api/v1/yt/info?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DLXb3EKWsInQ HTTP/1.1" 200 -
+00:48:38,448 werkzeug WARNING  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+00:48:38,448 werkzeug INFO  * Running on http://192.168.8.6:5000/ (Press CTRL+C to quit)
+00:48:49,234 werkzeug INFO 192.168.8.7 - - [17/May/2021 00:48:49] "POST /api/v1/jobs/save HTTP/1.1" 200 -
+00:48:54,375 werkzeug INFO 192.168.8.7 - - [17/May/2021 00:48:54] "GET /api/v1/yt/info?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DLXb3EKWsInQ HTTP/1.1" 200 -
+00:50:52,632 werkzeug WARNING  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+00:50:52,632 werkzeug INFO  * Running on http://192.168.8.6:5000/ (Press CTRL+C to quit)
+00:51:00,676 werkzeug INFO 192.168.8.7 - - [17/May/2021 00:51:00] "POST /api/v1/jobs/save HTTP/1.1" 200 -
+00:51:47,372 werkzeug INFO 192.168.8.7 - - [17/May/2021 00:51:47] "GET /api/v1/yt/info?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DLXb3EKWsInQ HTTP/1.1" 200 -
+00:51:53,339 werkzeug INFO 192.168.8.7 - - [17/May/2021 00:51:53] "POST /api/v1/jobs/save HTTP/1.1" 200 -
+00:51:56,148 werkzeug INFO 192.168.8.7 - - [17/May/2021 00:51:56] "GET /api/v1/yt/info?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DLXb3EKWsInQ HTTP/1.1" 200 -
+00:52:33,91 werkzeug INFO 192.168.8.7 - - [17/May/2021 00:52:33] "POST /api/v1/jobs/save HTTP/1.1" 200 -
+00:52:56,401 werkzeug WARNING  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+00:52:56,401 werkzeug INFO  * Running on http://192.168.8.6:5000/ (Press CTRL+C to quit)
+00:52:59,808 werkzeug INFO 192.168.8.7 - - [17/May/2021 00:52:59] "GET /api/v1/yt/info?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DLXb3EKWsInQ HTTP/1.1" 200 -
+00:53:07,169 werkzeug INFO 192.168.8.7 - - [17/May/2021 00:53:07] "POST /api/v1/jobs/save HTTP/1.1" 200 -
+00:53:17,433 werkzeug INFO 192.168.8.7 - - [17/May/2021 00:53:17] "GET /api/v1/yt/info?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DLXb3EKWsInQ HTTP/1.1" 200 -
+00:53:35,596 werkzeug INFO 192.168.8.7 - - [17/May/2021 00:53:35] "POST /api/v1/jobs/save HTTP/1.1" 200 -
+00:56:50,989 werkzeug WARNING  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+00:56:50,989 werkzeug INFO  * Running on http://192.168.8.6:5000/ (Press CTRL+C to quit)
+00:56:57,559 werkzeug INFO 192.168.8.7 - - [17/May/2021 00:56:57] "GET /api/v1/yt/info?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D4kRycxdU2nA HTTP/1.1" 200 -
+00:57:58,124 werkzeug INFO 192.168.8.7 - - [17/May/2021 00:57:58] "GET /api/v1/yt/info?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DLXb3EKWsInQ HTTP/1.1" 200 -
+01:01:11,402 werkzeug WARNING  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+01:01:11,402 werkzeug INFO  * Running on http://192.168.8.6:5000/ (Press CTRL+C to quit)
+01:01:12,348 root ERROR insert_job() failed. Exception: (sqlite3.InterfaceError) Error binding parameter 2 - probably unsupported type.
+[SQL: INSERT INTO job (url, start_at_midnight, job_type, format, preset, status, start_time, end_time, date_created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('dummy', 1, <JobType.YtdlUpdate: 3>, 'dummy', 'dummy', 1, None, None, '2021-05-16 19:31:12.347856')]
+(Background on this error at: http://sqlalche.me/e/14/rvf5)
+01:01:47,487 werkzeug WARNING  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+01:01:47,488 werkzeug INFO  * Running on http://192.168.8.6:5000/ (Press CTRL+C to quit)
+01:02:07,527 werkzeug INFO 192.168.8.7 - - [17/May/2021 01:02:07] "POST /api/v1/jobs/save HTTP/1.1" 200 -
+01:03:02,240 werkzeug WARNING  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+01:03:02,241 werkzeug INFO  * Running on http://192.168.8.6:5000/ (Press CTRL+C to quit)
+01:03:03,158 root ERROR insert_job() failed. Exception: (sqlite3.InterfaceError) Error binding parameter 2 - probably unsupported type.
+[SQL: INSERT INTO job (url, start_at_midnight, job_type, format, preset, status, start_time, end_time, date_created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('dummy', 1, <JobType.YtdlUpdate: 3>, 'dummy', 'dummy', 1, None, None, '2021-05-16 19:33:03.157775')]
+(Background on this error at: http://sqlalche.me/e/14/rvf5)
