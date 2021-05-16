@@ -4,7 +4,9 @@ WORKDIR /app/downloader
 
 RUN apt-get -y update 
 
-RUN pip3 install flask flask-sqlalchemy pip install flask-login sqlalchemy-utils youtube-dl
+RUN pip3 install flask flask-sqlalchemy pip install flask-login sqlalchemy-utils youtube-dl 
+
+# urllib2
 
 
 COPY ./ ./

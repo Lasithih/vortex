@@ -102,3 +102,13 @@
    WARNING: This is a development server. Do not use it in a production deployment.
 20:15:25,940 werkzeug INFO  * Running on http://192.168.8.6:5000/ (Press CTRL+C to quit)
 20:15:25,942 werkzeug INFO  * Restarting with stat
+20:17:55,704 werkzeug INFO  * Restarting with stat
+20:18:45,764 werkzeug INFO  * Restarting with stat
+20:19:43,476 werkzeug INFO  * Restarting with stat
+20:20:40,753 werkzeug INFO  * Restarting with stat
+20:26:44,520 werkzeug INFO  * Restarting with stat
+20:29:08,243 werkzeug INFO  * Restarting with stat
+20:30:08,774 werkzeug INFO  * Restarting with stat
+20:30:53,497 werkzeug INFO  * Restarting with stat
+20:31:00,953 werkzeug INFO  * Restarting with stat
+20:31:28,756 werkzeug INFO  * Restarting with stat
