@@ -2,3 +2,19 @@ nav {
   padding-left: 16px;
   padding-right: 16px;
 }
+
+.mw-600 {
+  max-width: 600px;
+}
+
+.form-item {
+  min-width: 200px;;
+}
+
+.bg-error-d {
+  background-color: #ffd2d2;
+}
+
+.bg-success-d {
+  background-color: #b8ffc4;
+}

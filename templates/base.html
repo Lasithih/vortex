@@ -8,10 +8,30 @@
   <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
   <link rel="stylesheet" href="{{ url_for('static',filename='libs/bootstrap/css/bootstrap.min.css') }}">
 
-  {% block head %}{% endblock %}
+  <script>
+    function showErrorModal(error) {
+      $('#errorModalContent').html(error);
+      $('#modal-error').modal('show');
+    }
+
+    function closeErrorModal() {
+      $('#modal-error').modal('hide');
+    }
+
+    function showSuccessModal(success) {
+      $('#successModalContent').html(success);
+      $('#modal-success').modal('show');
+    }
+
+    function closeSuccessModal() {
+      $('#modal-success').modal('hide');
+    }
+  </script>
 
   <script src="{{ url_for('static',filename='libs/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ url_for('static',filename='libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+  {% block head %}{% endblock %}
 </head>
 
 <body>
@@ -36,6 +56,45 @@
     </ul>
     {% endif %}
   </nav>
+
+  <!-- Modals  -->
+  <div class="container-fluid mt-3">
+    <div id="modal-error" class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-error-d">
+            <h5 class="modal-title" id="errorModalLabel">Error</h5>
+          </div>
+          <div id="errorModalContent" class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeErrorModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-success" class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-success-d">
+            <h5 class="modal-title" id="successModalLabel">Success</h5>
+          </div>
+          <div id="successModalContent" class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeSuccessModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   {% block body %}{% endblock %}
 </body>
 

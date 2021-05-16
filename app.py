@@ -1,7 +1,7 @@
 import web_server
 import logging
 import config
-from config import Env
+from enums import Env
 
 log_level = logging.DEBUG
 if config.config_get_env() == Env.Production:

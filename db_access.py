@@ -12,10 +12,18 @@ class Job(db.Model):
     start_at_midnight = db.Column(db.Boolean, default=True)
     job_type = db.Column(db.Integer, nullable=False)
     format = db.Column(db.String(10), nullable=False)
+    preset = db.Column(db.String(10), nullable=False, default='auto')
     status = db.Column(db.Integer, default=0) #TODO - Check default value
-    start_time = db.Column(db.DateTime, nullable=True)
-    end_time = db.Column(db.DateTime, nullable=True)
+    start_time = db.Column(db.String(20), nullable=True)
+    end_time = db.Column(db.String(20), nullable=True)
     date_created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    
+    def __repr__(self) -> str:
+        return '<Task %r>' % self.id
+
+class Version(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    current_db_version = db.Column(db.String(10), nullable=False)
     
     def __repr__(self) -> str:
         return '<Task %r>' % self.id

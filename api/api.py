@@ -9,6 +9,7 @@ from models import User
 import db_access
 import youtube
 import config
+from enums import JobType
 
 def create_endpoints(app):
     create_endpoint_login(app)
@@ -61,13 +62,14 @@ def create_endpoint_job_save(app):
     @login_required
     def api_new_job():
         try:
-            info = request.args
+            info = request.get_json()
             url = info.get('url', '')
-            start_at_midnight = info.get('start_at_midnight', '')
-            job_type = info.get('job_type', '')
+            start_at_midnight = info.get('isOffPeak', '')
+            job_type = JobType.Youtube.value
             format = info.get('format', '')
-            start_time = info.get('start_time', '')
-            end_time = info.get('end_time', '')
+            format = info.get('preset', 'auto')
+            start_time = info.get('start_time', None)
+            end_time = info.get('end_time', None)
 
             # TODO - Validate data
 

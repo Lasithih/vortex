@@ -1,9 +1,5 @@
 import os
-from enum import Enum
-
-class Env(Enum):
-    Production = 1
-    Development = 2
+from enums import Env
 
 # Default Values
 ENV = Env.Production
