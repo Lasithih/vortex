@@ -1,6 +1,4 @@
-import re
 from flask import app
-from flask.globals import current_app
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy_utils as dbUtils
 import datetime
@@ -35,24 +33,23 @@ def create_db(app, db):
     else:
         db.create_all()
 
-def create_sample():
+def insert_job(job):
     global db
-    new_task = Job(url='sdhjfb',
-    job_type=1,
-    format='format',
-    status=1)
-
     try:
-        db.session.add(new_task)
+        db.session.add(job)
         db.session.commit()
+        return True
     except:
-        print("Insert failed")
+        raise Exception ("Database operation error!")
 
-    get_sample_data()
+def get_all_jobs():
+    global db
+    try:
+        jobs = Job.query.all()
+        return jobs
+    except:
+        raise Exception ("Database operation error!")
 
-def get_sample_data():
-    jobs = Job.query.all()
-    print("Found {count} jobs".format(count=len(jobs)))
 
     
 
