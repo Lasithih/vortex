@@ -11,7 +11,10 @@ from db_access import Job
 from enums import JobType
 
 
-ydl = youtube_dl.YoutubeDL()
+ydl = youtube_dl.YoutubeDL({
+    'noplaylist':True,
+    'geo_bypass':True
+})
 
 def get_version():
     return subprocess.check_output('youtube-dl --version',shell=True).decode("utf-8").rstrip()
@@ -52,6 +55,8 @@ def extract_info(url):
 def download(job):
     ydl_opts = {
         'format': 'best',
+        'noplaylist':True,
+        'geo_bypass':True,
         'outtmpl': 'downloads/%(format_id)s-%(title)s.%(ext)s'
     }
     print("Format: {}".format(job.format))
