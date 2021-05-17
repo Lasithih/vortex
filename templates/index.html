@@ -24,7 +24,7 @@
             <!-- Youtube Form -->
             <div class="form-group mb-3">
                 <label for="yt-url">Youtube Video URL</label>
-                <input type="text" class="form-control" name="yt-url" id="yt-url" required value="https://www.youtube.com/watch?v=4kRycxdU2nA">
+                <input type="text" class="form-control" name="yt-url" id="yt-url" required>
                 <div class="invalid-feedback">
                     A valid url is required
                 </div>
@@ -76,7 +76,23 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="direct" role="tabpanel" aria-labelledby="direct-tab">c</div>
+        <div class="tab-pane fade" id="direct" role="tabpanel" aria-labelledby="direct-tab">
+            <!-- Direct Download Form -->
+            <div class="form-group mb-3">
+                <label for="dd-url">Download URL</label>
+                <input type="text" class="form-control" name="dd-url" id="dd-url" required>
+                <div class="invalid-feedback">
+                    A valid url is required
+                </div>
+            </div>
+            <div class="checkbox form-item mb-3">
+                <label>
+                    <input type="checkbox" value="dd-offpeak" id="dd-offpeak" name="dd-offpeak" checked />
+                    Download in off peak hours
+                </label>
+            </div>
+            <button class="btn btn-primary" id="btn-dd-job" onclick="AddDirectDownload()">Add Download Job</button>
+        </div>
     </div>
 </div>
 

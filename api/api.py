@@ -65,13 +65,15 @@ def create_endpoint_job_save(app):
             info = request.get_json()
             url = info.get('url', '')
             start_at_midnight = info.get('isOffPeak', '')
-            job_type = JobType.Youtube.value
+            job_type = int(info.get('jobType', 2))
             format = info.get('format', '')
             preset = info.get('preset', 'auto')
             start_time = info.get('start_time', None)
             end_time = info.get('end_time', None)
 
             # TODO - Validate data
+            if JobType != 1 and job_type != 2:
+                raise Exception("Invalid job type")
 
             job = db_access.Job(
                 url = url,

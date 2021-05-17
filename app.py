@@ -39,8 +39,6 @@ logging.basicConfig(filename="logs/downloader.log",
                             datefmt='%H:%M:%S',
                             level=log_level)
 
-
-
 #start ytdl-auto updater
 thread_ytdl_updater = threading.Thread(target=run_auto_updater)
 thread_ytdl_updater.start()

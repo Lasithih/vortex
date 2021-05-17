@@ -8,14 +8,17 @@ var IndexViewModel = {
     label_youtubeTitle: null,
     select_youtubeFormat: null,
     select_youtubePreset: null,
-    check_downloadOffpeak: null
+    check_downloadOffpeak: null,
+    check_directDownloadOffpeak: null,
+    txt_directDownloadUrl: null
 }
 
 var JobModel = {
     url: null,
     format: null,
     preset: null,
-    isOffPeak: true
+    isOffPeak: true,
+    jobType: 0
 }
 
 $(function() {
@@ -34,6 +37,9 @@ function bindViews(){
     IndexViewModel.select_youtubeFormat = $('#yt-format');
     IndexViewModel.select_youtubePreset = $('#yt-preset');
     IndexViewModel.check_downloadOffpeak = $('#yt-offpeak');
+    IndexViewModel.check_directDownloadOffpeak = $('#dd-offpeak');
+    IndexViewModel.txt_directDownloadUrl = $('#dd-url');
+    IndexViewModel.btn_addDdJob = $('#btn-dd-job');
 }
 
 //Onclick - start
@@ -79,6 +85,7 @@ function addYTdownloadJob() {
     JobModel.format = IndexViewModel.select_youtubeFormat.val();
     JobModel.preset = IndexViewModel.select_youtubePreset.val();
     JobModel.isOffPeak = IndexViewModel.check_downloadOffpeak.is(':checked');
+    JobModel.jobType = 1
 
     IndexViewModel.btn_addYtJob.prop("disabled",true);
     $.ajax({
@@ -100,6 +107,46 @@ function addYTdownloadJob() {
         error(e) {
             console.log(e.responseText);
             IndexViewModel.btn_addYtJob.prop("disabled",false);
+            showErrorModal(e);
+        }
+    });
+}
+
+function AddDirectDownload() {
+    var url = IndexViewModel.txt_directDownloadUrl.val();
+    if(url === '' || url === null) {
+        alert("Enter the URL to continue");
+        return;
+    }
+
+    if(!validURL(url)) {
+        alert("Enter a valid URL to continue");
+        return;
+    }
+
+    JobModel.url = url;
+    JobModel.isOffPeak = IndexViewModel.check_directDownloadOffpeak.is(':checked');
+    JobModel.jobType = 2;
+
+    IndexViewModel.btn_addDdJob.prop("disabled",true);
+    $.ajax({
+        url: "/api/v1/jobs/save", 
+        type: "POST", 
+        contentType: "application/json",
+        processData: false,
+        data: JSON.stringify(JobModel),
+        success: function(result) {
+            if(result.success) {
+                resetYTdetails();//todo
+                showSuccessModal("Job Successfully Added");
+            } else {
+                showErrorModal(result.data);
+            }
+            IndexViewModel.btn_addDdJob.prop("disabled",false);
+        },
+        error(e) {
+            console.log(e.responseText);
+            IndexViewModel.btn_addDdJob.prop("disabled",false);
             showErrorModal(e);
         }
     });

@@ -2,11 +2,13 @@ import logging
 import db_access
 import time
 from threading import Lock
+from threading import current_thread
 import subprocess
 
 from enums import JobStatus, JobType
 from db_access import Job
 import youtube
+import direct_download
 
 
 downloader_queue = []
@@ -22,18 +24,16 @@ def fill_pending_jobs():
     thread_lock.release()
 
 def execute_job(job):
+    db_access.update_job_status(job.id, JobStatus.downloading)
     success = JobStatus.failed
     if job.job_type == JobType.Youtube.value:
         success = JobStatus.success if download_youtube(job) else JobStatus.failed
     elif job.job_type == JobType.Direct.value:
         success = JobStatus.success  if download_direct(job) else JobStatus.failed
     elif job.job_type == JobType.YtdlUpdate.value:
-        print("YTDL updating")
         success = JobStatus.success if update_ytdl() else JobStatus.failed
-        print("YTDL update status: {}".format(success))
     else:
         logging.error("Unknown job type: {}".format(job.job_type))
-
     db_access.update_job_status(job.id, success)
 
 def init_downloader():
@@ -49,9 +49,7 @@ def init_downloader():
             thread_lock.acquire()
             job = downloader_queue.pop(0)
             thread_lock.release()
-            print("New Job found")
             execute_job(job)
-
         time.sleep(5)
 
 
@@ -74,4 +72,8 @@ def download_youtube(job):
         return False
 
 def download_direct(job):
-    pass
+    try:
+        direct_download.download(job.url)
+        return True
+    except Exception as e:
+        return False
