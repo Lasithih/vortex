@@ -2,8 +2,9 @@ import logging
 import db_access
 import time
 from threading import Lock
-from threading import current_thread
 import subprocess
+import os
+import sys
 
 from enums import JobStatus, JobType
 from db_access import Job
@@ -35,6 +36,8 @@ def execute_job(job):
     else:
         logging.error("Unknown job type: {}".format(job.job_type))
     db_access.update_job_status(job.id, success)
+    if job.job_type == JobType.YtdlUpdate.value:
+        os.execv(sys.executable, ['python'] + sys.argv)
 
 def init_downloader():
     global downloader_queue 
@@ -49,6 +52,7 @@ def init_downloader():
             thread_lock.acquire()
             job = downloader_queue.pop(0)
             thread_lock.release()
+            print("New job found")
             execute_job(job)
         time.sleep(5)
 

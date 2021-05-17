@@ -72,7 +72,7 @@ def create_endpoint_job_save(app):
             end_time = info.get('end_time', None)
 
             # TODO - Validate data
-            if JobType != 1 and job_type != 2:
+            if job_type != JobType.Direct.value and job_type != JobType.Youtube.value:
                 raise Exception("Invalid job type")
 
             job = db_access.Job(

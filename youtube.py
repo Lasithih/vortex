@@ -10,12 +10,6 @@ import db_access
 from db_access import Job
 from enums import JobType, PyModule
 
-needs_module_reloading = False
-
-def set_module_needs_reloading():
-    global needs_module_reloading
-    needs_module_reloading = True
-
 
 def get_version():
     # return subprocess.check_output('youtube-dl --version',shell=True).decode("utf-8").rstrip()
@@ -69,8 +63,6 @@ def check_updates():
 
 def extract_info(url):
     try:
-        if needs_module_reloading:
-            reload(youtube_dl)
         ydl = youtube_dl.YoutubeDL({
             'noplaylist':True,
             'geo_bypass':True
@@ -85,8 +77,6 @@ def extract_info(url):
 
 
 def download(job):
-    if needs_module_reloading:
-        reload(youtube_dl)
     ydl_opts = {
         'format': 'best',
         'noplaylist':True,
