@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
-import youtube_dl
-
+from importlib import reload
+import re
 import youtube_dl
 import requests
 import subprocess
@@ -8,16 +8,26 @@ import logging
 
 import db_access
 from db_access import Job
-from enums import JobType
+from enums import JobType, PyModule
 
+needs_module_reloading = False
 
-ydl = youtube_dl.YoutubeDL({
-    'noplaylist':True,
-    'geo_bypass':True
-})
+def set_module_needs_reloading():
+    global needs_module_reloading
+    needs_module_reloading = True
+
 
 def get_version():
-    return subprocess.check_output('youtube-dl --version',shell=True).decode("utf-8").rstrip()
+    # return subprocess.check_output('youtube-dl --version',shell=True).decode("utf-8").rstrip()
+    # return db_access.get_module_version(PyModule.Ytdl)
+    output = subprocess.check_output('pip list | grep youtube-dl',shell=True).decode("utf-8")
+    version_search = re.search('youtube-dl[\s\t]+(.*)', output, re.IGNORECASE)
+    version = None
+    if version_search:
+        version = version_search.group(1)
+    return version
+        
+
 
 def get_ytdl_latest_version():
     target_url = 'http://rg3.github.io/youtube-dl/update/LATEST_VERSION'
@@ -28,14 +38,30 @@ def get_ytdl_latest_version():
 def check_updates():
     ytdl_version = get_version()
     ytdl_latest_version = get_ytdl_latest_version()
-    if ytdl_latest_version == ytdl_version:
+
+    latest_array = ytdl_latest_version.split('.')
+    current_array = ytdl_version.split('.')
+
+    if len(latest_array) != len(current_array):
+        return
+    
+    is_equal = True
+    try:
+        for i in range(len(latest_array)):
+            if int(latest_array[i]) != int(current_array[i]):
+                is_equal = False
+                break
+    except:
+        return
+
+    if is_equal:
         logging.info("Youtube-dl up to date")
     else:
         logging.info("New Version Available")
         logging.info("Installed version: {}".format(ytdl_version))
         logging.info("Available version: {}".format(ytdl_latest_version))
 
-        job = db_access.Job(url='dummy',job_type = JobType.YtdlUpdate.value, format='dummy', preset='dummy')
+        job = db_access.Job(url='dummy',start_at_midnight=False,job_type = JobType.YtdlUpdate.value, format='dummy', preset='dummy')
         db_access.insert_job(job)
 
         
@@ -43,6 +69,12 @@ def check_updates():
 
 def extract_info(url):
     try:
+        if needs_module_reloading:
+            reload(youtube_dl)
+        ydl = youtube_dl.YoutubeDL({
+            'noplaylist':True,
+            'geo_bypass':True
+        })
         result = ydl.extract_info(
             url,
             download=False # We just want to extract the info
@@ -53,6 +85,8 @@ def extract_info(url):
 
 
 def download(job):
+    if needs_module_reloading:
+        reload(youtube_dl)
     ydl_opts = {
         'format': 'best',
         'noplaylist':True,
@@ -75,6 +109,10 @@ def download(job):
         ydl_opts['format'] = job.preset
 
 
-    
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([job.url])
+    try:
+        ydl = youtube_dl.YoutubeDL(ydl_opts)
+        ret_code = ydl.download([job.url])
+        return ret_code
+    except Exception as e:
+        logging.error("Failed to download youtube video - {}".format(str(e)))
+        raise e

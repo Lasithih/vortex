@@ -19,7 +19,7 @@ def signal_handler(sig, frame):
 def run_auto_updater():
     while True:
         youtube.check_updates()
-        time.sleep(60)
+        time.sleep(config.config_get_ytdl_check_update_interval())
 
 def run_downloader():
     downloader.init_downloader()

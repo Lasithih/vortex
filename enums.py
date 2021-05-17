@@ -16,4 +16,7 @@ class JobStatus(Enum):
     success = 3
     failed = 4
 
+class PyModule(Enum):
+    Ytdl = 'youtube-dl'
+
     

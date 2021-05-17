@@ -30,6 +30,6 @@ def config_get_dashboard_password():
 
 def config_get_ytdl_check_update_interval():
     try:
-        return os.environ['YTDL_CHECK_UPDATE_INTERVAL']
+        return int(os.environ['YTDL_CHECK_UPDATE_INTERVAL'])
     except:
         return YTDL_CHECK_UPDATE_INTERVAL

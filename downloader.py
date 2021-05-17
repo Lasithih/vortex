@@ -1,8 +1,8 @@
-import os
 import logging
 import db_access
 import time
 from threading import Lock
+import subprocess
 
 from enums import JobStatus, JobType
 from db_access import Job
@@ -22,16 +22,19 @@ def fill_pending_jobs():
     thread_lock.release()
 
 def execute_job(job):
+    success = JobStatus.failed
     if job.job_type == JobType.Youtube.value:
-        download_youtube(job)
+        success = JobStatus.success if download_youtube(job) else JobStatus.failed
     elif job.job_type == JobType.Direct.value:
-        download_direct(job)
+        success = JobStatus.success  if download_direct(job) else JobStatus.failed
     elif job.job_type == JobType.YtdlUpdate.value:
-        update_ytdl()
+        print("YTDL updating")
+        success = JobStatus.success if update_ytdl() else JobStatus.failed
+        print("YTDL update status: {}".format(success))
     else:
         logging.error("Unknown job type: {}".format(job.job_type))
 
-    db_access.update_job_status(job.id, JobStatus.success)
+    db_access.update_job_status(job.id, success)
 
 def init_downloader():
     global downloader_queue 
@@ -46,17 +49,29 @@ def init_downloader():
             thread_lock.acquire()
             job = downloader_queue.pop(0)
             thread_lock.release()
+            print("New Job found")
             execute_job(job)
 
         time.sleep(5)
 
 
 def update_ytdl():
-    os.system('sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl')
-    os.system('sudo sudo chmod a+rx /usr/local/bin/youtube-dl')
+    # os.system('sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl')
+    # os.system('sudo sudo chmod a+rx /usr/local/bin/youtube-dl')
+    try:
+        subprocess.check_output('pip install --upgrade youtube-dl',shell=True)
+        youtube.set_module_needs_reloading()
+        return True
+    except:
+        return False
+    
 
 def download_youtube(job):
-    youtube.download(job)
+    try:
+        ret = youtube.download(job)
+        return ret == 0
+    except Exception as e:
+        return False
 
 def download_direct(job):
     pass
