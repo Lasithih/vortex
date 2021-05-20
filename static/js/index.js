@@ -16,7 +16,7 @@ var IndexViewModel = {
     table_jobs: null,
 
     timer_loadJobs: null,
-    timer_loadJobsInterval: 500
+    timer_loadJobsInterval: 5000
 }
 
 var YTJobModel = {
@@ -139,12 +139,16 @@ function fillJobsTable(jobs) {
         tableRow += "<td>";
         if(job.status === 1) {
             tableRow += "Pending";
+            tableRow = tableRow.replace("<tr>", "<tr class='table-warning'>");
         } else if(job.status === 2) {
             tableRow += "Downloading";
+            tableRow = tableRow.replace("<tr>", "<tr class='table-primary'>");
         } else if(job.status === 3) {
             tableRow += "Success";
+            tableRow = tableRow.replace("<tr>", "<tr class='table-success'>");
         } else if(job.status === 4) {
             tableRow += "Failed";
+            tableRow = tableRow.replace("<tr>", "<tr class='table-danger'>");
         } else {
             tableRow += "Unknown";
         }
@@ -173,6 +177,7 @@ function removeJob(id) {
             } else {
                 showErrorModal(result.data);
             }
+            loadJobs();
         },
         error(e) {
             console.log(e.statusText);
@@ -244,6 +249,7 @@ function addYTdownloadJob() {
                 showErrorModal(result.data);
             }
             IndexViewModel.btn_addYtJob.prop("disabled",false);
+            loadJobs();
         },
         error(e) {
             console.log(e.statusText);
@@ -256,21 +262,6 @@ function addYTdownloadJob() {
 function AddDirectDownload() {
 
     DDJobModel.reset();
-    var url = IndexViewModel.txt_youtubeURL.val();
-
-    if(url === '' || url === null) {
-        alert("Enter the URL to continue");
-        return;
-    }
-
-    if(!validURL(url)) {
-        alert("Enter a valid URL to continue");
-        return;
-    }
-
-    DDJobModel.url = url
-    DDJobModel.isOffPeak = IndexViewModel.check_downloadOffpeak.is(':checked');
-    DDJobModel.jobType = 2
 
     var url = IndexViewModel.txt_directDownloadUrl.val();
     if(url === '' || url === null) {
@@ -296,12 +287,12 @@ function AddDirectDownload() {
         data: JSON.stringify(DDJobModel),
         success: function(result) {
             if(result.success) {
-                resetYTdetails();//todo
                 showSuccessModal("Job Successfully Added");
             } else {
                 showErrorModal(result.data);
             }
             IndexViewModel.btn_addDdJob.prop("disabled",false);
+            loadJobs();
         },
         error(e) {
             console.log(e.statusText);

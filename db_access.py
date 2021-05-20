@@ -8,7 +8,7 @@ import json
 from sqlalchemy.ext.declarative import DeclarativeMeta
 
 db=SQLAlchemy()
-
+db_version = 1
 
 class AlchemyEncoder(json.JSONEncoder):
 
@@ -46,7 +46,7 @@ class Job(db.Model):
 
 class Version(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    current_db_version = db.Column(db.String(10), nullable=False)
+    current_db_version = db.Column(db.Integer, default=0)
     
     def __repr__(self) -> str:
         return '<Task %r>' % self.id
@@ -78,11 +78,29 @@ def create_db(app, db):
     else:
         try:
             db.create_all()
+            insert_db_version()
         except Exception as e:
             logging.error("db.create_all() failed. Exception: {}".format(str(e)))
             raise e
 
+def insert_db_version():
+    global db
+    try:
+        version = Version(current_db_version = db_version)
+        db.session.add(version)
+    except:
+        pass
 
+def update_db_version():
+    global db
+    try:
+        version = Version.query.one()
+        version.current_db_version = db_version
+        db.session.commit()
+        return True
+    except:
+        return False
+        
 def insert_job(job):
     global db
     try:
