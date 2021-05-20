@@ -4,6 +4,7 @@ from enums import Env
 # Default Values
 ENV = Env.Production
 SECRET_KEY = '72cowDH%FeJpqxX7*YXV'
+DASHBOARD_USERNAME = 'admin'
 DASHBOARD_PASSWORD = 'admin'
 YTDL_CHECK_UPDATE_INTERVAL = 86400 #seconds - 86400: one a day
 
@@ -27,6 +28,12 @@ def config_get_dashboard_password():
         return os.environ['DASHBOARD_PASSWORD']
     except:
         return DASHBOARD_PASSWORD
+
+def config_get_dashboard_username():
+    try:
+        return os.environ['DASHBOARD_USERNAME']
+    except:
+        return DASHBOARD_USERNAME
 
 def config_get_ytdl_check_update_interval():
     try:

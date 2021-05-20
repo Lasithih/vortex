@@ -1,6 +1,5 @@
 import requests
 import logging
-import time
 
 def get_file_name(url):
     arr = url.split('/')

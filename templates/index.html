@@ -2,7 +2,7 @@
 
 {% block head %}
 <script src="{{ url_for('static',filename='js/index.js') }}"></script>
-<title>Download Manager</title>
+<title>Vortex</title>
 {% endblock %}
 
 {% block body %}
@@ -52,11 +52,15 @@
                                         <option value="auto" selected>Auto</option>
                                     </select>
                                 </div>
-                                <div class="col-auto orm-group form-item">
+                                <div class="col-auto form-group form-item">
                                     <label for="yt-preset">Preset</label>
                                     <select id="yt-preset" class="form-select" aria-label="Default select example">
                                         <option value="auto" selected>Auto</option>
                                     </select>
+                                </div>
+                                <div id="yt-size-container" class="col-auto">
+                                    <label for="yt-size">Size</label>
+                                    <p id="yt-size">N/A</p>
                                 </div>
                             </div>
                             
@@ -94,6 +98,42 @@
             <button class="btn btn-primary" id="btn-dd-job" onclick="AddDirectDownload()">Add Download Job</button>
         </div>
     </div>
+</div>
+
+<div class="container-fluid">
+    <table class="table" id="table-jobs">
+        <thead class="table-dark bg-primary-color">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">URL</th>
+            <th scope="col">Title</th>
+            <th scope="col">Off Peak</th>
+            <th scope="col">Type</th>
+            <th scope="col">Status</th>
+            <th scope="col">Format</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
 </div>
 
 {% endblock %}

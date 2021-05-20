@@ -10,19 +10,48 @@ var IndexViewModel = {
     select_youtubePreset: null,
     check_downloadOffpeak: null,
     check_directDownloadOffpeak: null,
-    txt_directDownloadUrl: null
+    txt_directDownloadUrl: null,
+    container_youtubeVideoSize: null,
+    txt_youtubeVideoSize: null,
+    table_jobs: null,
+
+    timer_loadJobs: null,
+    timer_loadJobsInterval: 500
 }
 
-var JobModel = {
+var YTJobModel = {
     url: null,
+    title: null,
     format: null,
     preset: null,
     isOffPeak: true,
-    jobType: 0
+    jobType: 1,
+
+    reset: function() {
+        url = null,
+        title = null,
+        format = null,
+        preset = null,
+        isOffPeak = true,
+        jobType = 1
+    }
+}
+
+var DDJobModel = {
+    url: null,
+    isOffPeak: true,
+    jobType: 2,
+
+    reset: function() {
+        url = null,
+        isOffPeak = true,
+        jobType = 2
+    }
 }
 
 $(function() {
     bindViews();
+    startLoadingJobs();
 });
 
 function bindViews(){
@@ -40,10 +69,122 @@ function bindViews(){
     IndexViewModel.check_directDownloadOffpeak = $('#dd-offpeak');
     IndexViewModel.txt_directDownloadUrl = $('#dd-url');
     IndexViewModel.btn_addDdJob = $('#btn-dd-job');
+    IndexViewModel.container_youtubeVideoSize = $('#yt-size-container');
+    IndexViewModel.txt_youtubeVideoSize = $('#yt-size');
+    IndexViewModel.table_jobs = $('#table-jobs');
+}
+
+function startLoadingJobs() {
+    loadJobs();
+
+    // var autoRefresh = $('#logs-auto-refresh').is(':checked');
+    // if (autoRefresh) {
+    IndexViewModel.timer_loadJobs = setInterval(loadJobs, IndexViewModel.timer_loadJobsInterval);
+    // }
+
+    // $("#logs-auto-refresh").change(function() {
+    //     if (this.checked) {
+    //         LogViewerModel.fetchTimer = setInterval(getLogs, LogViewerModel.fetchInterval);
+    //     } else {
+    //         if (LogViewerModel.fetchTimer !== null) {
+    //             clearInterval(LogViewerModel.fetchTimer);
+    //         }
+    //     }
+    // });
+}
+
+function loadJobs() {
+    
+    $.ajax({
+        type: "GET",
+        url: "/api/v1/jobs/list",
+        processData: false,
+        contentType: "application/json",
+        success: function(data, status, xhr) {
+            if(data.success) {
+                fillJobsTable(data.data);
+            } 
+        },
+        error: function(xhr) {
+            var exMessage = typeof xhr.responseJSON.Message == 'undefined' ?
+                "Couldn't fetch event types." :
+                xhr.responseJSON.Message;
+            showErrorModal(exMessage);
+        }
+    });
+}
+
+function fillJobsTable(jobs) {
+    var tableContent = "";
+    for (let i = 0; i < jobs.length; i++) {
+        const job = jobs[i];
+        tableRow = "<tr>";
+        tableRow += "<th scope='row'>"+job.id+"</th>";
+        tableRow += "<td>"+job.url+"</td>";
+        tableRow += "<td>"+job.title+"</td>";
+        tableRow += "<td>";
+        if(job.start_at_midnight === 1) {
+            tableRow += "Yes";
+        } else {
+            tableRow += "No";
+        }
+        tableRow += "</td>";
+        tableRow += "<td>";
+        if(job.job_type === 1) {
+            tableRow += "Youtube";
+        } else {
+            tableRow += "Direct Download";
+        }
+        tableRow += "</td>";
+        tableRow += "<td>";
+        if(job.status === 1) {
+            tableRow += "Pending";
+        } else if(job.status === 2) {
+            tableRow += "Downloading";
+        } else if(job.status === 3) {
+            tableRow += "Success";
+        } else if(job.status === 4) {
+            tableRow += "Failed";
+        } else {
+            tableRow += "Unknown";
+        }
+        tableRow += "</td>";
+        tableRow += "<td>"+job.format+"</td>";
+        tableRow += "<td><a href='javascript:removeJob("+job.id+")'>Remove</a></td>";
+        tableRow += "</tr>";
+
+        tableContent += tableRow;
+    }
+
+    $('#table-body').html(tableContent);
+}
+
+function removeJob(id) {
+    console.log("deleting: "+id);
+    $.ajax({
+        url: "/api/v1/jobs/delete", //the page containing php script
+        type: "POST", //request type,
+        contentType: "application/json",
+        processData: false,
+        data: JSON.stringify({'id':id}),
+        success: function(result) {
+            if(result.success) {
+                showSuccessModal("Job Successfully Deleted");
+            } else {
+                showErrorModal(result.data);
+            }
+        },
+        error(e) {
+            console.log(e.statusText);
+            showErrorModal(e.statusText);
+        }
+    });
 }
 
 //Onclick - start
 function fetchYTdata() {
+    YTJobModel.reset();
+
     var url = IndexViewModel.txt_youtubeURL.val();
     if(url === '' || url === null) {
         alert("Enter the URL to continue");
@@ -55,7 +196,7 @@ function fetchYTdata() {
         return;
     }
 
-    JobModel.url = url
+    YTJobModel.url = url
 
     IndexViewModel.btn_addYtJob.prop("disabled",false);
     IndexViewModel.btn_fetchYoutube.prop("disabled",true);
@@ -74,7 +215,7 @@ function fetchYTdata() {
             IndexViewModel.btn_fetchYoutube.prop("disabled",false);
         },
         error(e) {
-            console.log(e.responseText);
+            console.log(e.statusText);
             IndexViewModel.btn_fetchYoutube.prop("disabled",false);
             IndexViewModel.section_youtubeDetails.hide();
         }
@@ -82,10 +223,10 @@ function fetchYTdata() {
 }
 
 function addYTdownloadJob() {
-    JobModel.format = IndexViewModel.select_youtubeFormat.val();
-    JobModel.preset = IndexViewModel.select_youtubePreset.val();
-    JobModel.isOffPeak = IndexViewModel.check_downloadOffpeak.is(':checked');
-    JobModel.jobType = 1
+    YTJobModel.format = IndexViewModel.select_youtubeFormat.val();
+    YTJobModel.preset = IndexViewModel.select_youtubePreset.val();
+    YTJobModel.isOffPeak = IndexViewModel.check_downloadOffpeak.is(':checked');
+    YTJobModel.jobType = 1
 
     IndexViewModel.btn_addYtJob.prop("disabled",true);
     $.ajax({
@@ -93,7 +234,7 @@ function addYTdownloadJob() {
         type: "POST", //request type,
         contentType: "application/json",
         processData: false,
-        data: JSON.stringify(JobModel),
+        data: JSON.stringify(YTJobModel),
         success: function(result) {
             if(result.success) {
                 resetYTdetails();
@@ -105,7 +246,7 @@ function addYTdownloadJob() {
             IndexViewModel.btn_addYtJob.prop("disabled",false);
         },
         error(e) {
-            console.log(e.responseText);
+            console.log(e.statusText);
             IndexViewModel.btn_addYtJob.prop("disabled",false);
             showErrorModal(e);
         }
@@ -113,6 +254,24 @@ function addYTdownloadJob() {
 }
 
 function AddDirectDownload() {
+
+    DDJobModel.reset();
+    var url = IndexViewModel.txt_youtubeURL.val();
+
+    if(url === '' || url === null) {
+        alert("Enter the URL to continue");
+        return;
+    }
+
+    if(!validURL(url)) {
+        alert("Enter a valid URL to continue");
+        return;
+    }
+
+    DDJobModel.url = url
+    DDJobModel.isOffPeak = IndexViewModel.check_downloadOffpeak.is(':checked');
+    DDJobModel.jobType = 2
+
     var url = IndexViewModel.txt_directDownloadUrl.val();
     if(url === '' || url === null) {
         alert("Enter the URL to continue");
@@ -124,9 +283,9 @@ function AddDirectDownload() {
         return;
     }
 
-    JobModel.url = url;
-    JobModel.isOffPeak = IndexViewModel.check_directDownloadOffpeak.is(':checked');
-    JobModel.jobType = 2;
+    DDJobModel.url = url;
+    DDJobModel.isOffPeak = IndexViewModel.check_directDownloadOffpeak.is(':checked');
+    DDJobModel.jobType = 2;
 
     IndexViewModel.btn_addDdJob.prop("disabled",true);
     $.ajax({
@@ -134,7 +293,7 @@ function AddDirectDownload() {
         type: "POST", 
         contentType: "application/json",
         processData: false,
-        data: JSON.stringify(JobModel),
+        data: JSON.stringify(DDJobModel),
         success: function(result) {
             if(result.success) {
                 resetYTdetails();//todo
@@ -145,7 +304,7 @@ function AddDirectDownload() {
             IndexViewModel.btn_addDdJob.prop("disabled",false);
         },
         error(e) {
-            console.log(e.responseText);
+            console.log(e.statusText);
             IndexViewModel.btn_addDdJob.prop("disabled",false);
             showErrorModal(e);
         }
@@ -176,12 +335,40 @@ function fillExtentions(yt_details) {
     });
 
     fillPresets(yt_details);
+
     IndexViewModel.select_youtubeFormat.on('change', function() {
         fillPresets(yt_details);
+        fillYtPresetSize(yt_details);
+    });
+
+    IndexViewModel.txt_youtubeVideoSize.text('N/A');
+    IndexViewModel.select_youtubePreset.on('change', function() {
+        fillYtPresetSize(yt_details);
     });
 }
 
+function fillYtPresetSize(yt_details) {
 
+    var selected = IndexViewModel.select_youtubePreset.val();
+
+    if(selected === 'auto'){
+        IndexViewModel.container_youtubeVideoSize.hide();
+        IndexViewModel.txt_youtubeVideoSize.text('N/A');
+        return;
+    }
+
+    var preset = yt_details.formats.filter(function(format) {
+        return format.format_id == selected;
+    })[0];
+
+    if(typeof preset === 'undefined' || typeof preset.filesize === 'undefined' || preset.filesize == null) {
+        IndexViewModel.container_youtubeVideoSize.hide();
+        IndexViewModel.txt_youtubeVideoSize.text('N/A');
+        return;
+    }
+    IndexViewModel.txt_youtubeVideoSize.text(preset.filesize.fileSize());
+    IndexViewModel.container_youtubeVideoSize.show();
+}
 
 function fillPresets(yt_details) {
     IndexViewModel.select_youtubePreset.find('option').remove().end().append('<option value="auto" selected>Auto</option>');
@@ -202,6 +389,8 @@ function fillPresets(yt_details) {
 function populateYTdetails(yt_details) {
     resetYTdetails();
 
+    YTJobModel.title = yt_details.title
+
     IndexViewModel.image_youtubeThumbnail.attr("src",yt_details.thumbnail);
     IndexViewModel.label_youtubeTitle.html(yt_details.title);
 
@@ -209,6 +398,9 @@ function populateYTdetails(yt_details) {
 }
 
 function resetYTdetails() {
+    IndexViewModel.container_youtubeVideoSize.hide();
+    IndexViewModel.txt_youtubeVideoSize.text("N/A");
+
     IndexViewModel.image_youtubeThumbnail.attr("src",''); //TODO - Placeholder image
     IndexViewModel.label_youtubeTitle.html('');
 
@@ -230,4 +422,59 @@ function validURL(str) {
       '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
       '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
     return !!pattern.test(str);
+}
+
+Number.prototype.fileSize = function() {
+
+    const gb = 1024 *1024 *1024;
+    const mb = 1024 *1024;
+    const kb = 1024;
+
+    var val = this.valueOf();
+    var str = "";
+    var unit = "";
+
+    if(val >= gb) {
+        str =  (val/gb).toFixed().toString();
+        unit = "GB"
+
+    } else if(val >= mb) {
+        str =  (val/mb).toFixed().toString();
+        unit = "MB"
+
+    } else if(val >= kb) {
+        str =  (val/kb).toFixed().toString();
+        unit = "KB"
+    } else {
+        str =  val.toFixed().toString();
+        unit = "B"
+    }
+    
+    var arr = str.split('.');
+    if(arr.length === 2) {
+        if(arr[1].length > 2) {
+            str = arr[0] + '.' + arr[1].slice(0,2);
+        }
+    }
+
+    return str + ' ' + unit
+}
+
+Number.prototype.toFixed = function() {
+    var x = this.valueOf();
+    if (Math.abs(x) < 1.0) {
+      var e = parseInt(x.toString().split('e-')[1]);
+      if (e) {
+          x *= Math.pow(10,e-1);
+          x = '0.' + (new Array(e)).join('0') + x.toString().substring(2);
+      }
+    } else {
+      var e = parseInt(x.toString().split('+')[1]);
+      if (e > 20) {
+          e -= 20;
+          x /= Math.pow(10,e);
+          x += (new Array(e+1)).join('0');
+      }
+    }
+    return x;
   }

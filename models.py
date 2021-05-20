@@ -1,5 +1,7 @@
+import config
+
 class User():
-    name = 'admin'
+    name = config.config_get_dashboard_username()
     id = 1
     
     def to_json(self):

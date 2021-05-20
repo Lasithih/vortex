@@ -1,4 +1,4 @@
-from flask_login import login_manager, login_required, current_user, LoginManager, logout_user
+from flask_login import login_required, current_user, LoginManager, logout_user
 from flask import render_template, redirect, url_for
 from models import User
 

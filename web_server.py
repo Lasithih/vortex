@@ -1,13 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 from flask_login import login_required
 
-from api import api
+import api
 import auth
 import db_access
 import config
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/downloads.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/vortex.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = config.config_get_secret_key()
 
@@ -29,4 +29,4 @@ def index():
 
 
 def init_web_server():
-    app.run(host="0.0.0.0",debug=False)
+    app.run(host="0.0.0.0",debug=True)

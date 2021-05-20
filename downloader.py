@@ -35,6 +35,7 @@ def execute_job(job):
         success = JobStatus.success if update_ytdl() else JobStatus.failed
     else:
         logging.error("Unknown job type: {}".format(job.job_type))
+        
     db_access.update_job_status(job.id, success)
     if job.job_type == JobType.YtdlUpdate.value:
         os.execv(sys.executable, ['python'] + sys.argv)

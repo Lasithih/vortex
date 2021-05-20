@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-from importlib import reload
 import re
 import youtube_dl
 import requests
@@ -7,8 +6,7 @@ import subprocess
 import logging
 
 import db_access
-from db_access import Job
-from enums import JobType, PyModule
+from enums import JobType
 
 
 def get_version():
