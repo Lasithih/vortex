@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='libs/bootstrap/css/bootstrap.min.css') }}">
+
+  <script>
+    function showErrorModal(error) {
+      $('#errorModalContent').html(error);
+      $('#modal-error').modal('show');
+    }
+
+    function closeErrorModal() {
+      $('#modal-error').modal('hide');
+    }
+
+    function showSuccessModal(success) {
+      $('#successModalContent').html(success);
+      $('#modal-success').modal('show');
+    }
+
+    function closeSuccessModal() {
+      $('#modal-success').modal('hide');
+    }
+  </script>
+
+  <script src="{{ url_for('static',filename='libs/jquery/jquery-3.6.0.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+  {% block head %}{% endblock %}
+</head>
+
+<body class="bg-secondary-color">
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-center">
+    <a class="navbar-brand brand-text" href="#">Vortex</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <!-- <li class="nav-item">
+                    <a class="nav-link" href="/downloader">Downloader <span class="sr-only">(current)</span></a>
+                </li> -->
+      </ul>
+    </div>
+    {% if current_user.is_authenticated %}
+    <ul class="nav navbar-nav navbar-right">
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+    </ul>
+    {% endif %}
+  </nav>
+
+  <!-- Modals  -->
+  <div class="container-fluid mt-3">
+    <div id="modal-error" class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-error-d">
+            <h5 class="modal-title" id="errorModalLabel">Error</h5>
+          </div>
+          <div id="errorModalContent" class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeErrorModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-success" class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-success-d">
+            <h5 class="modal-title" id="successModalLabel">Success</h5>
+          </div>
+          <div id="successModalContent" class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeSuccessModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  {% block body %}{% endblock %}
+</body>
+
+</html>

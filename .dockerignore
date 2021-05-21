@@ -5,5 +5,13 @@ support/downloader-fe
 support/downloader
 install.sh
 Dockerfile
-Dockerfile.temp
+Dockerfile.prod
+Dockerfile.dev
 config.env
+data/vortex.db
+downloads/*
+__pycache__
+logs/*
+docker-compose.yaml
+Dockerfile.dev
+Dockerfile.prod

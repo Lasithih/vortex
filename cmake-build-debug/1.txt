@@ -1,2 +1,0 @@
-sh: 1: ═лквмif: not found
-sh: 1: [: /home/ubuntu/shared/downloads/%(title)s.%(ext)s: unexpected operator

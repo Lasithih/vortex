@@ -1,0 +1,49 @@
+nav {
+  padding-left: 16px;
+  padding-right: 16px;
+  background-color: #005cbf;
+  height: 65px;
+}
+
+.bg-primary-color {
+  background-color: #005cbf;
+  color: white;
+}
+
+.bg-secondary-color {
+  background-color: #e9ecef;
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+}
+
+.brand-text {
+  font-size: 1.8rem !important;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+  color: white;
+  background-color: #0d6efd;    
+  border-bottom: none;
+}
+
+.nav.nav-tabs {
+  border-bottom: 3px solid #d2dfec;
+}
+
+.mw-600 {
+  max-width: 600px;
+}
+
+.form-item {
+  min-width: 200px;;
+}
+
+.bg-error-d {
+  background-color: #ffd2d2;
+}
+
+.bg-success-d {
+  background-color: #b8ffc4;
+}

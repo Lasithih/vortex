@@ -32,3 +32,8 @@
 *.dSYM/
 
 config.env
+__pycache__/
+downloads/*
+data/downloads.db
+
+logs/downloader.log
