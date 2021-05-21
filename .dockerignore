@@ -8,5 +8,10 @@ Dockerfile
 Dockerfile.prod
 Dockerfile.dev
 config.env
-data/downloads.db
+data/vortex.db
 downloads/*
+__pycache__
+logs/*
+docker-compose.yaml
+Dockerfile.dev
+Dockerfile.prod
