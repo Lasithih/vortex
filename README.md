@@ -1,57 +1,69 @@
-# Download Manager
 
-Download manager for Linux written in c
+# Vortex - Download Manager
 
-<br>
+Vortex is a download manager with a interactive web interface.
 
-### Prerequisites
-You need to have MySQL server installed (local or remote)
+## Quick start with docker compose
 
-<br>
-
-### Install
-Clone repository by running
-```bash
-git clone https://github.com/Lasithih/downloader.git
+    version: '3'
+		services:
+		  download-manager:
+		    container_name: Download_Manager
+		    image: 'lasithih/vortex'
+		    restart: always
+		    volumes:
+		      - ~/Downloads:/app/downloader/downloads
+		      - /etc/localtime:/etc/localtime:ro
+		      - ~/Downloads/DownloadManager/data:/app/downloader/data
+		      - ~/Downloads/DownloadManager/logs:/app/downloader/logs
+		    environment:
+		      - SECRET_KEY=33KNxu84ZzNu
+		      - DASHBOARD_USERNAME=admin
+		      - DASHBOARD_PASSWORD=password
+		    ports:
+		      - "5000:5000"
+http://localhost:5000
+![Capture4](https://user-images.githubusercontent.com/12048316/119219088-42805480-bb01-11eb-9c40-6d24d549bc1a.PNG)
+## How to use this image
+```
+docker run --name vortex-downloader -d lasithih/vortex
 ```
 
-Or download the latest release from
-https://github.com/Lasithih/downloader/releases
-
-<br>
-
-Go to base directory and execute
-```bash
-sudo ./install.sh
+### Exposing web interface port
 ```
-
-This will
-- Install downloader as a systemd service
-- Update the config file of the downloader with the configurations of your database
-- Update the config file of the frontend app with the configurations of your database
-<br>
-
-### Frontend app
-To manage download jobs use the frontend app located in downloader-fe directory. **after running install.sh**
-Copy downloader-fe directory to a server.
-This will be done automatically if you select to install the frontend app when you run **install.sh** 
-<br>
-  
-### Configurations
-You can find the configurations file at
-```bash
-$HOME/LIHApps/Downloader/config.cfg
+docker run \
+ --name vortex-downloader \
+ -p 5000:5000 \
+ -d lasithih/vortex
 ```
+Go to http://localhost:5000 on your browser to access the web interface. 
+Default username: admin
+Default password: admin
+To change default credentials, see  Environment Variables
+
 <br>
 
-### Troubleshooting
-Log files location
-```bash
-/var/log/downloader
+### Mounting download/data/log directories
+**/app/downloader/downloads** - Vortex stores downloads in this directory
+**/app/downloader/data** - Directory that stores the database with the download jobs
+**/app/downloader/logs** - Keeps logs
+**/etc/localtime:/etc/localtime:ro** - Important to sync time with the host (for off-peak downloads)
+```
+docker run \
+ --name vortex-downloader \
+ -p 5000:5000 \
+ -v your/path/to/downloads:/app/downloader/downloads \
+ -v your/path/to/data:/app/downloader/data \
+ -v your/path/to/logs:/app/downloader/logs\
+ -d lasithih/vortex
 ```
 <br>
 
-#### Check status of downloader
-```bash
-sudo systemctl status downloader.service
-```
+### Environment Variables
+
+| Variable name | Description |
+|--|--|
+| SECRET_KEY | (Required) A key for sqlite database |
+| DASHBOARD_USERNAME | (Optional) Username to login to web interface (Default: admin) |
+| DASHBOARD_PASSWORD | (Optional) Password to login to web interface (Default: admin) |
+
