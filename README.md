@@ -57,9 +57,21 @@ docker run \
  -v your/path/to/logs:/app/downloader/logs\
  -d lasithih/vortex
 ```
-<br>
 
 ### Environment Variables
+```
+docker run \
+ --name vortex-downloader \
+ -p 5000:5000 \
+ -v your/path/to/downloads:/app/downloader/downloads \
+ -v your/path/to/data:/app/downloader/data \
+ -v your/path/to/logs:/app/downloader/logs\
+ -e SECRET_KEY=my-secret-key
+ -d lasithih/vortex
+```
+<br>
+
+### Environment Variables List
 
 | Variable name | Description |
 |--|--|
