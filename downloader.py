@@ -13,6 +13,7 @@ import direct_download
 
 
 downloader_queue = []
+run_downloader = True
 
 
 def fill_pending_jobs():
@@ -27,6 +28,7 @@ def fill_pending_jobs():
 def execute_job(job):
     db_access.update_job_status(job.id, JobStatus.downloading)
     success = JobStatus.failed
+    logging.info('Job type: {}'.format(job.job_type))
     if job.job_type == JobType.Youtube.value:
         success = JobStatus.success if download_youtube(job) else JobStatus.failed
     elif job.job_type == JobType.Direct.value:
@@ -35,32 +37,35 @@ def execute_job(job):
         success = JobStatus.success if update_ytdl() else JobStatus.failed
     else:
         logging.error("Unknown job type: {}".format(job.job_type))
-        
+    
+    logging.info('Job done. Job status: {}'.format(success))
     db_access.update_job_status(job.id, success)
+    
     if job.job_type == JobType.YtdlUpdate.value:
         os.execv(sys.executable, ['python'] + sys.argv)
 
 def init_downloader():
     global downloader_queue 
     global thread_lock
+    global run_downloader
 
     thread_lock = Lock()
     downloader_queue = []
 
-    while True:
+    while run_downloader:
         fill_pending_jobs()
         while(len(downloader_queue) > 0):
+            logging.info("New download job found")
             thread_lock.acquire()
             job = downloader_queue.pop(0)
             thread_lock.release()
-            print("New job found")
             execute_job(job)
         time.sleep(5)
+    
+    print('Exited thread: Downloader')
 
 
 def update_ytdl():
-    # os.system('sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl')
-    # os.system('sudo sudo chmod a+rx /usr/local/bin/youtube-dl')
     try:
         subprocess.check_output('pip install --upgrade youtube-dl',shell=True)
         youtube.set_module_needs_reloading()

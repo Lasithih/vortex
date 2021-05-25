@@ -1,3 +1,4 @@
+import logging
 from re import A
 from flask import request, jsonify
 from flask_login import login_user, login_required
@@ -77,6 +78,7 @@ def create_endpoint_job_save(app):
 
             # TODO - Validate data
             if job_type != JobType.Direct.value and job_type != JobType.Youtube.value:
+                logging.error("Invalid job type")
                 raise Exception("Invalid job type")
 
             if len(title) > 390:
@@ -140,6 +142,7 @@ def create_endpoint_get_yt_video_info(app):
             info = request.args
             url = info.get('url', '')
             if(url == ''):
+                logging.error("Invalid URL")
                 raise Exception("Invalid URL")
             
             result = youtube.extract_info(url)

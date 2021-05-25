@@ -37,3 +37,5 @@ downloads/*
 data/downloads.db
 
 logs/downloader.log
+
+logs/

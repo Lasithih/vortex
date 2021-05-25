@@ -1,3 +1,4 @@
+import logging
 from flask import Flask, render_template
 from flask_login import login_required
 
@@ -5,6 +6,7 @@ import api
 import auth
 import db_access
 import config
+import enums
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/vortex.db'
@@ -29,4 +31,6 @@ def index():
 
 
 def init_web_server():
-    app.run(host="0.0.0.0",debug=False)
+    flaskLogger = logging.getLogger('werkzeug')
+    flaskLogger.setLevel(logging.WARNING)
+    app.run(host="0.0.0.0",debug=config.config_get_env() == enums.Env.Development)

@@ -25,6 +25,8 @@ var YTJobModel = {
     format: null,
     preset: null,
     isOffPeak: true,
+    start_time: 40,
+    end_time: 50,
     jobType: 1,
 
     reset: function() {

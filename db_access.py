@@ -88,8 +88,8 @@ def insert_db_version():
     try:
         version = Version(current_db_version = db_version)
         db.session.add(version)
-    except:
-        pass
+    except Exception as e:
+        raise e
 
 def update_db_version():
     global db
