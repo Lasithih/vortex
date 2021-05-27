@@ -61,6 +61,7 @@ def check_updates():
 
 
 def extract_info(url):
+    logging.info('Extracting info for url: {}'.format(url))
     try:
         ydl = youtube_dl.YoutubeDL({
             'noplaylist':True,
@@ -73,7 +74,7 @@ def extract_info(url):
         return result
     except Exception as e:
         logging.error("extract_info(url): Could not extract data from URL. Exception: {}".format(str(e)))
-        raise Exception("Could not extract data from URL")
+        raise e
 
 def preset_is_audio_only(preset, details):
     for format in details['formats']:

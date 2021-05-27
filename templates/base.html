@@ -7,8 +7,21 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
   <link rel="stylesheet" href="{{ url_for('static',filename='libs/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='libs/toastr/toastr.min.css') }}">
 
   <script>
+    function showErrorToast(message) {
+      toastr.error(message)
+    }
+
+    function showSuccessToast(message) {
+      toastr.success(message)
+    }
+
+    function showWarningToast(message) {
+      toastr.warning(message)
+    }
+
     function showErrorModal(error) {
       $('#errorModalContent').html(error);
       $('#modal-error').modal('show');
@@ -30,6 +43,7 @@
 
   <script src="{{ url_for('static',filename='libs/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ url_for('static',filename='libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='libs/toastr/toastr.min.js') }}"></script>
 
   {% block head %}{% endblock %}
 </head>
@@ -59,8 +73,8 @@
 
   <!-- Modals  -->
   <div class="container-fluid mt-3">
-    <div id="modal-error" class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
-      aria-hidden="true">
+    <div id="modal-error" class="modal fade" id="errorModal" tabindex="-1" role="dialog"
+      aria-labelledby="errorModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header bg-error-d">
@@ -70,14 +84,15 @@
             ...
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeErrorModal()">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+              onclick="closeErrorModal()">Close</button>
           </div>
         </div>
       </div>
     </div>
 
-    <div id="modal-success" class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
-      aria-hidden="true">
+    <div id="modal-success" class="modal fade" id="successModal" tabindex="-1" role="dialog"
+      aria-labelledby="successModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header bg-success-d">
@@ -87,7 +102,8 @@
             ...
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeSuccessModal()">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+              onclick="closeSuccessModal()">Close</button>
           </div>
         </div>
       </div>

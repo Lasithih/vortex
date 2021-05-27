@@ -28,7 +28,7 @@ def fill_pending_jobs():
 def execute_job(job):
     db_access.update_job_status(job.id, JobStatus.downloading)
     success = JobStatus.failed
-    logging.info('Job type: {}'.format(job.job_type))
+    logging.info('Job type: {}'.format(JobType(job.job_type)))
     if job.job_type == JobType.Youtube.value:
         success = JobStatus.success if download_youtube(job) else JobStatus.failed
     elif job.job_type == JobType.Direct.value:
@@ -40,7 +40,7 @@ def execute_job(job):
     
     logging.info('Job done. Job status: {}'.format(success))
     db_access.update_job_status(job.id, success)
-    
+
     if job.job_type == JobType.YtdlUpdate.value:
         os.execv(sys.executable, ['python'] + sys.argv)
 

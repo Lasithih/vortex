@@ -34,8 +34,7 @@
                 <!-- youtube details -->
                 <div class="col-6">
                     <!-- Thumbnail -->
-                    <img class="mw-600 img-fluid" id="yt-thumbnail" src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
-                        class="rounded float-start">
+                    <img class="mw-600 img-fluid" id="yt-thumbnail" src="" class="rounded float-start">
                     <blockquote class="blockquote mw-600">
                         <p id="yt-title"></p>
                     </blockquote>
@@ -44,39 +43,83 @@
                     <!-- Video Details -->
                     <h3 class="mb-3">Available Options</h3>
                     <div class="row">
-                        <div class="col-auto mb-3">
-                            <div class="row">
-                                <div class="col-auto form-group form-item">
-                                    <label for="yt-format">Format</label>
-                                    <select id="yt-format" class="form-select" aria-label="Default select example">
-                                        <option value="auto" selected>Auto</option>
-                                    </select>
-                                </div>
-                                <div class="col-auto form-group form-item">
-                                    <label for="yt-preset">Preset</label>
-                                    <select id="yt-preset" class="form-select" aria-label="Default select example">
-                                        <option value="auto" selected>Auto</option>
-                                    </select>
-                                </div>
-                                <div id="yt-size-container" class="col-auto">
-                                    <label for="yt-size">Size</label>
-                                    <p id="yt-size">N/A</p>
-                                </div>
+                        <div class="row">
+                            <div class="col-auto form-group form-item">
+                                <label for="yt-format">Format</label>
+                                <select id="yt-format" class="form-select" aria-label="Default select example">
+                                    <option value="auto" selected>Auto</option>
+                                </select>
                             </div>
-                            
-                        </div>
-                        <div class="col-auto">
-                            <div class="checkbox form-item">
-                                <label>
-                                    <input type="checkbox" value="yt-offpeak" id="yt-offpeak" name="yt-offpeak" checked>
-                                    Download in off peak hours
-                                </label>
+                            <div class="col-auto form-group form-item">
+                                <label for="yt-preset">Preset</label>
+                                <select id="yt-preset" class="form-select" aria-label="Default select example">
+                                    <option value="auto" selected>Auto</option>
+                                </select>
+                            </div>
+                            <div id="yt-size-container" class="col-auto">
+                                <label for="yt-size">Size</label>
+                                <p id="yt-size">N/A</p>
                             </div>
                         </div>
+                        <div class="row mx-0">
+                            <div class="card mt-3 special-card" id="yt-section-trim">
+                                <div class="card-header">
+                                    <div class="checkbox form-item">
+                                        <small class="row ms-1" id="trimming-warn">Trimming is not supported for the preset: Auto</small>
+                                        <label>
+                                            <input type="checkbox" value="yt-trimming" id="yt-trimming"
+                                                name="yt-trimming" disabled>
+                                            Trim video/audio
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text"
+                                                    id="basic-addon">Start</span>
+                                                <input type="text" class="form-control" id="yt-start-time"  pattern="^[\d]{2}:[012345][0-9]:[012345][0-9]$"
+                                                    aria-describedby="basic-addon" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text"
+                                                    id="basic-addon">End</span>
+                                                <input type="text" class="form-control" id="yt-end-time"  pattern="^[\d]{2}:[012345][0-9]:[012345][0-9]$"
+                                                    aria-describedby="basic-addon" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <small> Time inputs must be in format HH:MM:SS </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mx-0">
+                            <div class="card mt-3">
+                                <div class="card-header">
+                                    <div class="checkbox form-item">
+                                        <label>
+                                            <input type="checkbox" value="yt-offpeak" id="yt-offpeak" name="yt-offpeak">
+                                            Download in off peak hours
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="card-body text-muted">
+                                    <small>Video/Audio will be downloaded between 12 midnight and 8 am</small>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    
-                    
-                    <button class="btn btn-primary mt-5" id="btn-yt-add-job" onclick="addYTdownloadJob()">Add Download Job</button>
+
+
+                    <button class="btn btn-primary mt-3" id="btn-yt-add-job" onclick="addYTdownloadJob()">Add Download
+                        Job</button>
                 </div>
             </div>
         </div>
@@ -91,7 +134,7 @@
             </div>
             <div class="checkbox form-item mb-3">
                 <label>
-                    <input type="checkbox" value="dd-offpeak" id="dd-offpeak" name="dd-offpeak" checked />
+                    <input type="checkbox" value="dd-offpeak" id="dd-offpeak" name="dd-offpeak"/>
                     Download in off peak hours
                 </label>
             </div>
@@ -103,37 +146,20 @@
 <div class="container-fluid">
     <table class="table" id="table-jobs">
         <thead class="table-dark bg-primary-color">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">URL</th>
-            <th scope="col">Title</th>
-            <th scope="col">Off Peak</th>
-            <th scope="col">Type</th>
-            <th scope="col">Status</th>
-            <th scope="col">Format</th>
-            <th scope="col">Actions</th>
-          </tr>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">URL</th>
+                <th scope="col">Title</th>
+                <th scope="col">Off Peak</th>
+                <th scope="col">Type</th>
+                <th scope="col">Status</th>
+                <th scope="col">Format</th>
+                <th scope="col">Actions</th>
+            </tr>
         </thead>
         <tbody id="table-body">
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
         </tbody>
-      </table>
+    </table>
 </div>
 
 {% endblock %}

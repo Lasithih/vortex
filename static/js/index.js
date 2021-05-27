@@ -14,6 +14,11 @@ var IndexViewModel = {
     container_youtubeVideoSize: null,
     txt_youtubeVideoSize: null,
     table_jobs: null,
+    txt_youtubeStartTime: null,
+    txt_youtubeEndTime: null,
+    check_youtubeTrimming: null,
+    section_youtubeTrimming: null,
+    label_youtubeTrimmingWarning: null,
 
     timer_loadJobs: null,
     timer_loadJobsInterval: 5000
@@ -25,17 +30,19 @@ var YTJobModel = {
     format: null,
     preset: null,
     isOffPeak: true,
-    start_time: 40,
-    end_time: 50,
+    start_time: null,
+    end_time: null,
     jobType: 1,
 
     reset: function() {
-        url = null,
-        title = null,
-        format = null,
-        preset = null,
-        isOffPeak = true,
-        jobType = 1
+        this.url = null,
+        this.title = null,
+        this.format = null,
+        this.preset = null,
+        this.isOffPeak = true,
+        this.start_time = null,
+        this.end_time = null,
+        this.jobType = 1
     }
 }
 
@@ -53,7 +60,20 @@ var DDJobModel = {
 
 $(function() {
     bindViews();
+
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = "toastr-position";
+
     startLoadingJobs();
+
+    IndexViewModel.check_youtubeTrimming.change(function() {
+        if(this.checked) {
+            enable_trimming();
+        } else {
+            disable_trimming();
+        }
+    });
+      
 });
 
 function bindViews(){
@@ -74,25 +94,18 @@ function bindViews(){
     IndexViewModel.container_youtubeVideoSize = $('#yt-size-container');
     IndexViewModel.txt_youtubeVideoSize = $('#yt-size');
     IndexViewModel.table_jobs = $('#table-jobs');
+    IndexViewModel.label_youtubeTrimmingWarning = $('#trimming-warn');
+
+    IndexViewModel.section_youtubeTrimming = $('#yt-section-trim');
+    IndexViewModel.check_youtubeTrimming = $('#yt-trimming');
+    IndexViewModel.txt_youtubeStartTime = $('#yt-start-time');
+    IndexViewModel.txt_youtubeEndTime = $('#yt-end-time');
 }
 
 function startLoadingJobs() {
     loadJobs();
 
-    // var autoRefresh = $('#logs-auto-refresh').is(':checked');
-    // if (autoRefresh) {
     IndexViewModel.timer_loadJobs = setInterval(loadJobs, IndexViewModel.timer_loadJobsInterval);
-    // }
-
-    // $("#logs-auto-refresh").change(function() {
-    //     if (this.checked) {
-    //         LogViewerModel.fetchTimer = setInterval(getLogs, LogViewerModel.fetchInterval);
-    //     } else {
-    //         if (LogViewerModel.fetchTimer !== null) {
-    //             clearInterval(LogViewerModel.fetchTimer);
-    //         }
-    //     }
-    // });
 }
 
 function loadJobs() {
@@ -111,7 +124,7 @@ function loadJobs() {
             var exMessage = typeof xhr.responseJSON.Message == 'undefined' ?
                 "Couldn't fetch event types." :
                 xhr.responseJSON.Message;
-            showErrorModal(exMessage);
+            showErrorToast(exMessage);
         }
     });
 }
@@ -166,7 +179,6 @@ function fillJobsTable(jobs) {
 }
 
 function removeJob(id) {
-    console.log("deleting: "+id);
     $.ajax({
         url: "/api/v1/jobs/delete", //the page containing php script
         type: "POST", //request type,
@@ -175,7 +187,7 @@ function removeJob(id) {
         data: JSON.stringify({'id':id}),
         success: function(result) {
             if(result.success) {
-                showSuccessModal("Job Successfully Deleted");
+                showSuccessToast("Job Successfully Deleted");
             } else {
                 showErrorModal(result.data);
             }
@@ -218,6 +230,7 @@ function fetchYTdata() {
                 IndexViewModel.section_youtubeDetails.show();
             } else {
                 IndexViewModel.section_youtubeDetails.hide();
+                showErrorModal(result.data);
             }
             IndexViewModel.btn_fetchYoutube.prop("disabled",false);
         },
@@ -235,6 +248,16 @@ function addYTdownloadJob() {
     YTJobModel.isOffPeak = IndexViewModel.check_downloadOffpeak.is(':checked');
     YTJobModel.jobType = 1
 
+    if (IndexViewModel.check_youtubeTrimming.is(':checked')) {
+        try {
+            YTJobModel.start_time = IndexViewModel.txt_youtubeStartTime.val().toSeconds();
+            YTJobModel.end_time = IndexViewModel.txt_youtubeEndTime.val().toSeconds();
+        } catch(err) {
+            //Show error toast
+            console.error(err);
+        }
+    }
+
     IndexViewModel.btn_addYtJob.prop("disabled",true);
     $.ajax({
         url: "/api/v1/jobs/save", //the page containing php script
@@ -246,7 +269,7 @@ function addYTdownloadJob() {
             if(result.success) {
                 resetYTdetails();
                 IndexViewModel.section_youtubeDetails.hide();
-                showSuccessModal("Job Successfully Added");
+                showSuccessToast("Job Successfully Added");
             } else {
                 showErrorModal(result.data);
             }
@@ -289,7 +312,7 @@ function AddDirectDownload() {
         data: JSON.stringify(DDJobModel),
         success: function(result) {
             if(result.success) {
-                showSuccessModal("Job Successfully Added");
+                showSuccessToast("Job Successfully Added");
             } else {
                 showErrorModal(result.data);
             }
@@ -332,12 +355,22 @@ function fillExtentions(yt_details) {
     IndexViewModel.select_youtubeFormat.on('change', function() {
         fillPresets(yt_details);
         fillYtPresetSize(yt_details);
+        configure_trimming();
     });
 
     IndexViewModel.txt_youtubeVideoSize.text('N/A');
     IndexViewModel.select_youtubePreset.on('change', function() {
+        configure_trimming();
         fillYtPresetSize(yt_details);
     });
+}
+
+function configure_trimming() {
+    if(IndexViewModel.select_youtubePreset.val() === 'auto' && IndexViewModel.select_youtubeFormat.val() !== 'mp3') {
+        disable_trimming_option();
+    } else {
+        enable_trimming_option();
+    }
 }
 
 function fillYtPresetSize(yt_details) {
@@ -403,8 +436,40 @@ function resetYTdetails() {
 
     //Clear presets select
     IndexViewModel.select_youtubePreset.find('option').remove().end().append('<option value="auto" selected>Auto</option>');
+
+    disable_trimming_option();
 }
 
+function enable_trimming() {
+    IndexViewModel.txt_youtubeStartTime.removeAttr('disabled');
+    IndexViewModel.txt_youtubeEndTime.removeAttr('disabled');
+}
+
+function disable_trimming() {
+    IndexViewModel.txt_youtubeStartTime.attr('disabled', true);
+    IndexViewModel.txt_youtubeEndTime.attr('disabled', true);
+    IndexViewModel.txt_youtubeStartTime.val('');
+    IndexViewModel.txt_youtubeEndTime.val('');
+}
+
+function enable_trimming_option() {
+    IndexViewModel.section_youtubeTrimming.removeClass('special-card');
+    IndexViewModel.check_youtubeTrimming.removeAttr('disabled');
+    IndexViewModel.label_youtubeTrimmingWarning.hide();
+}
+
+function disable_trimming_option() {
+    IndexViewModel.section_youtubeTrimming.addClass('special-card');
+    IndexViewModel.check_youtubeTrimming.attr('disabled', true);
+    IndexViewModel.txt_youtubeStartTime.attr('disabled', true);
+    IndexViewModel.txt_youtubeEndTime.attr('disabled', true);
+
+    IndexViewModel.check_youtubeTrimming.prop('checked', false);
+    IndexViewModel.txt_youtubeStartTime.val('');
+    IndexViewModel.txt_youtubeEndTime.val('');
+
+    IndexViewModel.label_youtubeTrimmingWarning.show();
+}
 
 // HELPERS
 function validURL(str) {
@@ -470,4 +535,38 @@ Number.prototype.toFixed = function() {
       }
     }
     return x;
-  }
+}
+
+String.prototype.toSeconds = function() {
+    var textTime = this.valueOf();
+    
+    var res = textTime.match(/^[\d]{2}:[\d]{2}:[\d]{2}$/g);
+    if(res === null) {
+        throw "Wrong time format";
+    }
+
+    var arr = textTime.split(':');
+    var hours = parseInt(arr[0]);
+    var minutes = parseInt(arr[1]);
+    var seconds = parseInt(arr[2]);
+
+    return seconds + (minutes * 60) + (hours * 60 * 60)
+}
+
+String.prototype.toTime = function() {
+    // var textTime = this.valueOf();
+
+    // if(textTime.isNan)
+    
+    // var res = textTime.match(/^[\d]{2}:[\d]{2}:[\d]{2}$/g);
+    // if(res === null) {
+    //     throw "Wrong time format";
+    // }
+
+    // var arr = textTime.split(':');
+    // var hours = parseInt(arr[0]);
+    // var minutes = parseInt(arr[1]);
+    // var seconds = parseInt(arr[2]);
+
+    // return seconds + (minutes * 60) + (hours * 60 * 60)
+}

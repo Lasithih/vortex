@@ -60,7 +60,6 @@ def create_endpoint_job_list(app):
             }
             return jsonify(response)
 
-
 def create_endpoint_job_save(app):
     @app.route('/api/v1/jobs/save', methods=['POST'])
     @login_required
@@ -109,7 +108,6 @@ def create_endpoint_job_save(app):
             }
             return jsonify(response)
 
-
 def create_endpoint_job_delete(app):
     @app.route('/api/v1/jobs/delete', methods=['POST'])
     @login_required
@@ -132,8 +130,6 @@ def create_endpoint_job_delete(app):
             }
             return jsonify(response)
 
-
-
 def create_endpoint_get_yt_video_info(app):
     @app.route('/api/v1/yt/info', methods=['GET'])
     @login_required
@@ -141,6 +137,7 @@ def create_endpoint_get_yt_video_info(app):
         try:
             info = request.args
             url = info.get('url', '')
+            logging.debug('/api/v1/yt/info with args: {}'.format(str(info)))
             if(url == ''):
                 logging.error("Invalid URL")
                 raise Exception("Invalid URL")

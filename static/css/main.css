@@ -47,3 +47,38 @@ nav {
 .bg-success-d {
   background-color: #b8ffc4;
 }
+
+.special-card {
+  background-color: rgba(245, 245, 245, 1);
+  opacity: .5;
+}
+
+#yt-start-time:invalid {
+  border-color: red;
+  background-color: #ffd2d2;
+}
+
+#yt-start-time:valid {
+  border-color: #198754;
+  background-color: #b8ffc4;
+}
+
+#yt-end-time:invalid {
+  border-color: red;
+  background-color: #ffd2d2;
+}
+
+#yt-end-time:valid {
+  border-color: #198754;
+  background-color: #b8ffc4;
+}
+
+#trimming-warn {
+  color: red;
+}
+
+.toastr-position {
+  position: absolute;
+  right: 10px;
+  top: 80px;
+}
