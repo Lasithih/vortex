@@ -22,8 +22,10 @@ Vortex is a download manager with a interactive web interface.
 		      - DASHBOARD_PASSWORD=password
 		    ports:
 		      - "5000:5000"
-http://localhost:5000
-![Capture4](https://user-images.githubusercontent.com/12048316/119219088-42805480-bb01-11eb-9c40-6d24d549bc1a.PNG)
+
+![Capture7](https://user-images.githubusercontent.com/12048316/119863586-57ad1700-bf37-11eb-83f4-b67c7fe9457d.PNG)
+
+
 ## How to use this image
 ```
 docker run --name vortex-downloader -d lasithih/vortex
