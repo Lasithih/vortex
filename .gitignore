@@ -41,3 +41,4 @@ logs/downloader.log
 logs/
 
 data/
+*.pyc
