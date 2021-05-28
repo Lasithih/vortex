@@ -130,6 +130,7 @@ function loadJobs() {
 }
 
 function fillJobsTable(jobs) {
+    console.log(jobs)
     var tableContent = "";
     for (let i = 0; i < jobs.length; i++) {
         const job = jobs[i];
@@ -138,7 +139,7 @@ function fillJobsTable(jobs) {
         tableRow += "<td>"+job.url+"</td>";
         tableRow += "<td>"+job.title+"</td>";
         tableRow += "<td>";
-        if(job.start_at_midnight === 1) {
+        if(job.start_at_midnight) {
             tableRow += "Yes";
         } else {
             tableRow += "No";
