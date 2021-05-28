@@ -14,7 +14,8 @@ def video_trim(start_time, end_time, video_input, audio_input, output):
         joined = ffmpeg.concat(v1, a1, v=1, a=1).node
 
         outputStream = ffmpeg.output(joined[0], joined[1], output)
-        outputStream.run()
+        owOutputStream = ffmpeg.overwrite_output(outputStream)
+        owOutputStream.run()
     except Exception as e:
         logging.error("Error while trimming video_trim(start_time, end_time, input, output). Exception:{}".format(str(e)))
         raise e
