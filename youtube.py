@@ -163,7 +163,7 @@ def download(job):
             else:
                 ydl_opts['format'] = job.format
         else:
-            ydl_opts['format'] = job.preset
+            ydl_opts['format'] = '{}+bestaudio'.format(job.preset)
 
 
         try:
