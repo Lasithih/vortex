@@ -146,6 +146,7 @@ def download(job):
                                 video_input=input_video_url, 
                                 audio_input=input_audio_url, 
                                 output=output_file)
+            return 0
         except Exception as e:
             logging.error('Error while trimming. Exception: {}'.format(str(e)))
             raise e
