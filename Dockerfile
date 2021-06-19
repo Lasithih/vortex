@@ -1,11 +1,9 @@
-FROM python
+FROM python:alpine
 
 WORKDIR /app/downloader
 
-RUN set -x  add-apt-repository ppa:mc3man/trusty-media \
-    && apt-get -y update \
-    && apt-get -y dist-upgrade \
-    && apt-get install -y ffmpeg
+RUN apk add ffmpeg \
+    && apk add g++
 
 RUN pip3 install flask flask-sqlalchemy flask-login sqlalchemy-utils youtube_dl requests ffmpeg-python
 
