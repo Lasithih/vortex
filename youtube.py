@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 import re
-import youtube_dl
+import yt_dlp as youtube_dl
 import requests
 import subprocess
 import logging
@@ -13,8 +13,8 @@ import ffmpeg_dl
 def get_version():
     # return subprocess.check_output('youtube-dl --version',shell=True).decode("utf-8").rstrip()
     # return db_access.get_module_version(PyModule.Ytdl)
-    output = subprocess.check_output('pip list | grep youtube-dl',shell=True).decode("utf-8")
-    version_search = re.search('youtube-dl[\s\t]+(.*)', output, re.IGNORECASE)
+    output = subprocess.check_output('pip list | grep yt_dlp',shell=True).decode("utf-8")
+    version_search = re.search('yt_dlp[\s\t]+(.*)', output, re.IGNORECASE)
     version = None
     if version_search:
         version = version_search.group(1)
@@ -29,35 +29,8 @@ def get_ytdl_latest_version():
 
 
 def check_updates():
-    ytdl_version = get_version()
-    ytdl_latest_version = get_ytdl_latest_version()
-
-    latest_array = ytdl_latest_version.split('.')
-    current_array = ytdl_version.split('.')
-
-    if len(latest_array) != len(current_array):
-        return
-    
-    is_equal = True
-    try:
-        for i in range(len(latest_array)):
-            if int(latest_array[i]) != int(current_array[i]):
-                is_equal = False
-                break
-    except:
-        return
-
-    if is_equal:
-        logging.info("Youtube-dl up to date {}".format(ytdl_latest_version))
-    else:
-        logging.info("New Version Available")
-        logging.info("Installed version: {}".format(ytdl_version))
-        logging.info("Available version: {}".format(ytdl_latest_version))
-
-        job = db_access.Job(url='dummy',start_at_midnight=False,job_type = JobType.YtdlUpdate.value, format='dummy', preset='dummy')
-        db_access.insert_job(job)
-
-        
+    job = db_access.Job(url='dummy',start_at_midnight=False,job_type = JobType.YtdlUpdate.value, format='dummy', preset='dummy')
+    db_access.insert_job(job)    
 
 
 def extract_info(url):

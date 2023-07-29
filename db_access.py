@@ -77,6 +77,7 @@ def create_db(app, db):
         pass
     else:
         try:
+            app.app_context().push()
             db.create_all()
             insert_db_version()
         except Exception as e:
@@ -86,6 +87,7 @@ def create_db(app, db):
 def insert_db_version():
     global db
     try:
+        db.app.app_context().push()
         version = Version(current_db_version = db_version)
         db.session.add(version)
     except Exception as e:
@@ -94,6 +96,7 @@ def insert_db_version():
 def update_db_version():
     global db
     try:
+        db.app.app_context().push()
         version = Version.query.one()
         version.current_db_version = db_version
         db.session.commit()
@@ -104,6 +107,7 @@ def update_db_version():
 def insert_job(job):
     global db
     try:
+        db.app.app_context().push()
         db.session.add(job)
         db.session.commit()
         return True
@@ -113,6 +117,7 @@ def insert_job(job):
 
 def get_all_jobs():
     try:
+        db.app.app_context().push()
         jobs = Job.query.filter(Job.job_type != JobType.YtdlUpdate.value).order_by(Job.date_created.desc()).limit(100)
         return jobs
     except Exception as e:
@@ -122,6 +127,7 @@ def get_all_jobs():
 def delete_job(job_id):
     global db
     try:
+        db.app.app_context().push()
         Job.query.filter(Job.id == job_id).delete()
         db.session.commit()
     except Exception as e:
@@ -132,6 +138,7 @@ def get_download_jobs():
     try:
         isOffPeak = is_time_between(time(00,00), time(7,30))
         jobs = []
+        db.app.app_context().push()
         if(isOffPeak):
             jobs = Job.query.filter(Job.status==JobStatus.pending.value)
         else:
@@ -144,6 +151,7 @@ def get_download_jobs():
 def update_job_status(jobId, status):
     global db
     try:
+        db.app.app_context().push()
         job = Job.query.get(jobId)
         job.status = status.value
         db.session.commit()

@@ -11,4 +11,6 @@ services:
       - ~/Downloads/DownloadManager/data:/app/downloader/data
       - ~/Downloads/DownloadManager/logs:/app/downloader/logs
     environment:
-      - SECRET_KEY=your_secret_key
+      - SECRET_KEY=ishfsgdfkuasdfyafsudfaskd
+      - DASHBOARD_PASSWORD=admin 
+      - DASHBOARD_USERNAME=admin

@@ -30,7 +30,7 @@ def run_auto_updater():
         if ytdl_update_last_checked == None or current - ytdl_update_last_checked > config.config_get_ytdl_check_update_interval():
             youtube.check_updates()
             ytdl_update_last_checked = current
-        time.sleep(5)
+        time.sleep(3600)
     logging.info('Exited thread: Auto updater')
 
 def run_downloader():

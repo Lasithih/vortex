@@ -67,7 +67,7 @@ def init_downloader():
 
 def update_ytdl():
     try:
-        subprocess.check_output('pip install --upgrade youtube-dl',shell=True)
+        subprocess.check_output('pip install --upgrade yt_dlp',shell=True)
         youtube.set_module_needs_reloading()
         return True
     except:
