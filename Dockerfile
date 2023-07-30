@@ -5,7 +5,7 @@ WORKDIR /app/downloader
 RUN apk add ffmpeg \
     && apk add g++
 
-RUN pip3 install flask flask-sqlalchemy flask-login sqlalchemy-utils youtube_dl requests ffmpeg-python
+RUN pip3 install flask flask-sqlalchemy flask-login sqlalchemy-utils yt_dlp requests ffmpeg-python
 
 COPY ./ ./
 

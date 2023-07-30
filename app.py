@@ -62,7 +62,7 @@ rootLogger.addHandler(consoleHandler)
 
 #start ytdl-auto updater
 thread_ytdl_updater = threading.Thread(target=run_auto_updater)
-thread_ytdl_updater.start()
+# thread_ytdl_updater.start()
 
 # start worker
 thread_downloader = threading.Thread(target=run_downloader)

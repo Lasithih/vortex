@@ -104,6 +104,7 @@ def update_db_version():
 def insert_job(job):
     global db
     try:
+        db.app.app_context().push()
         db.session.add(job)
         db.session.commit()
         return True
@@ -113,6 +114,7 @@ def insert_job(job):
 
 def get_all_jobs():
     try:
+        db.app.app_context().push()
         jobs = Job.query.filter(Job.job_type != JobType.YtdlUpdate.value).order_by(Job.date_created.desc()).limit(100)
         return jobs
     except Exception as e:
@@ -122,6 +124,7 @@ def get_all_jobs():
 def delete_job(job_id):
     global db
     try:
+        db.app.app_context().push()
         Job.query.filter(Job.id == job_id).delete()
         db.session.commit()
     except Exception as e:
@@ -132,9 +135,11 @@ def get_download_jobs():
     try:
         isOffPeak = is_time_between(time(00,00), time(7,30))
         jobs = []
-        if(isOffPeak):
+        if(isOffPeak):        
+            db.app.app_context().push()
             jobs = Job.query.filter(Job.status==JobStatus.pending.value)
         else:
+            db.app.app_context().push()
             jobs = Job.query.filter(sqlalchemy.and_(Job.status == JobStatus.pending.value, Job.start_at_midnight==False))
         return jobs
     except Exception as e:
@@ -144,6 +149,7 @@ def get_download_jobs():
 def update_job_status(jobId, status):
     global db
     try:
+        db.app.app_context().push()
         job = Job.query.get(jobId)
         job.status = status.value
         db.session.commit()

@@ -6,9 +6,11 @@ services:
     ports: 
       - "5000:5000"
     volumes:
-      - ~/Downloads:/app/downloader/downloads
+      - './downloads:/app/downloader/downloads'
       - /etc/localtime:/etc/localtime:ro
-      - ~/Downloads/DownloadManager/data:/app/downloader/data
-      - ~/Downloads/DownloadManager/logs:/app/downloader/logs
+      - './data:/app/downloader/instance'
+      - './logs:/app/downloader/logs'
     environment:
       - SECRET_KEY=your_secret_key
+      - DASHBOARD_PASSWORD=admin
+      - DASHBOARD_USERNAME=admin

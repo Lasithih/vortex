@@ -9,9 +9,10 @@ import config
 import enums
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/vortex.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///vortex.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = config.config_get_secret_key()
+app.app_context().push()
 
 #Database
 db_initialized = False

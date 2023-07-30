@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 import re
-import youtube_dl
+import yt_dlp as youtube_dl
 import requests
 import subprocess
 import logging
