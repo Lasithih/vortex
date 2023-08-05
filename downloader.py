@@ -41,8 +41,8 @@ def execute_job(job):
     logging.info('Job done. Job status: {}'.format(success))
     db_access.update_job_status(job.id, success)
 
-    if job.job_type == JobType.YtdlUpdate.value:
-        os.execv(sys.executable, ['python'] + sys.argv)
+    # if job.job_type == JobType.YtdlUpdate.value:
+    #     os.execv(sys.executable, ['python'] + sys.argv)
 
 def init_downloader():
     global downloader_queue 
