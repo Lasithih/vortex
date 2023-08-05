@@ -87,39 +87,39 @@ def create_db(app, db):
 def insert_db_version():
     global db
     try:
-        db.app.app_context().push()
-        version = Version(current_db_version = db_version)
-        db.session.add(version)
+        with db.app.app_context():
+            version = Version(current_db_version = db_version)
+            db.session.add(version)
     except Exception as e:
         raise e
 
 def update_db_version():
     global db
     try:
-        db.app.app_context().push()
-        version = Version.query.one()
-        version.current_db_version = db_version
-        db.session.commit()
-        return True
+        with db.app.app_context():
+            version = Version.query.one()
+            version.current_db_version = db_version
+            db.session.commit()
+            return True
     except:
         return False
         
 def insert_job(job):
     global db
     try:
-        db.app.app_context().push()
-        db.session.add(job)
-        db.session.commit()
-        return True
+        with db.app.app_context():
+            db.session.add(job)
+            db.session.commit()
+            return True
     except Exception as e:
         logging.error("insert_job() failed. Exception: {}".format(str(e)))
         raise Exception ("Database operation error!")
 
 def get_all_jobs():
     try:
-        db.app.app_context().push()
-        jobs = Job.query.filter(Job.job_type != JobType.YtdlUpdate.value).order_by(Job.date_created.desc()).limit(100)
-        return jobs
+        with db.app.app_context():
+            jobs = Job.query.filter(Job.job_type != JobType.YtdlUpdate.value).order_by(Job.date_created.desc()).limit(100)
+            return jobs
     except Exception as e:
         logging.error("get_all_jobs() failed. Exception: {}".format(str(e)))
         raise Exception ("Database operation error!")
@@ -127,9 +127,9 @@ def get_all_jobs():
 def delete_job(job_id):
     global db
     try:
-        db.app.app_context().push()
-        Job.query.filter(Job.id == job_id).delete()
-        db.session.commit()
+        with db.app.app_context():
+            Job.query.filter(Job.id == job_id).delete()
+            db.session.commit()
     except Exception as e:
         logging.error("delete_job() failed. Exception: {}".format(str(e)))
         raise Exception ("Database operation error!")
@@ -138,11 +138,12 @@ def get_download_jobs():
     try:
         isOffPeak = is_time_between(time(00,00), time(7,30))
         jobs = []
-        db.app.app_context().push()
         if(isOffPeak):
-            jobs = Job.query.filter(Job.status==JobStatus.pending.value)
+            with db.app.app_context():
+                jobs = db.session.query(Job).filter(Job.status==JobStatus.pending.value).all()
         else:
-            jobs = Job.query.filter(sqlalchemy.and_(Job.status == JobStatus.pending.value, Job.start_at_midnight==False))
+            with db.app.app_context():
+                jobs = db.session.query(Job).filter(sqlalchemy.and_(Job.status == JobStatus.pending.value, Job.start_at_midnight==False)).all()
         return jobs
     except Exception as e:
         logging.error("get_download_jobs error: {}".format(str(e)))
@@ -151,10 +152,10 @@ def get_download_jobs():
 def update_job_status(jobId, status):
     global db
     try:
-        db.app.app_context().push()
-        job = Job.query.get(jobId)
-        job.status = status.value
-        db.session.commit()
+        with db.app.app_context():
+            job = db.session.query(Job).get(jobId)
+            job.status = status.value
+            db.session.commit()
         return True
     except Exception as e:
         logging.error("update_job_status error: {}".format(str(e)))
