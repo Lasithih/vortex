@@ -24,6 +24,7 @@ def signal_handler(sig, frame):
 #Thread targets
 def run_auto_updater():
     global ytdl_update_last_checked
+    ytdl_update_last_checked = int(datetime.datetime.now(datetime.timezone.utc).timestamp())
     while run_updater:
         current = int(datetime.datetime.now(datetime.timezone.utc).timestamp())
 
